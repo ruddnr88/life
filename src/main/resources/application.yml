@@ -1,0 +1,36 @@
+server:
+  port: 8087
+  error:
+    include-exception: true
+    include-stacktrace: always
+    include-message: always
+    include-binding-errors: always
+spring:
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: rkou1211@gmail.com
+    password: 1@3$5^7*
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+  mvc:
+    view:
+      prefix: /WEB-INF/jsp/
+      suffix: .jsp
+  datasource:
+    driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+    url: jdbc:log4jdbc:mysql://127.0.0.1:3306/life?useUnicode=true&characterEncoding=utf8&autoReconnect=true&serverTimezone=Asia/Seoul&useOldAliasMetadataBehavior=true&zeroDateTimeNehavior=convertToNull
+    username: sbsst
+    password: sbs123414
+mybatis:
+  type-aliases-package: com.project.rko.life.dto
+custom:
+  siteName: 오늘날씨
+  siteMainUri: https://todayWeather.com/
+  logoText: 오늘날씨
+  emailFrom: no-reply@todayWeather.com
+  emailFromName: 오늘날씨
