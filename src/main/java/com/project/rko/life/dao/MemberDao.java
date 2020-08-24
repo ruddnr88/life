@@ -20,5 +20,10 @@ public interface MemberDao {
 
 	Member getMemberByNameAndEmail(String name, String email);
 
+	void passWordmodify(int actorId, String loginPw);
+
+	void infoModify(Map<String, Object> param);
+
+
 
 }

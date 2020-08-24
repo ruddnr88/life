@@ -88,7 +88,7 @@
 				<th>로그인</th>
 				<td>
 					<button class="btn btn-primary" type="submit">로그인</button>
-					<a href="/member/findAccount" class ="btn btn-primary">아이디/비번찾기</a>
+					<a href="/usr/member/findAccount" class ="btn btn-primary">아이디/비번찾기</a>
 				</td>
 			</tr>
 		</tbody>

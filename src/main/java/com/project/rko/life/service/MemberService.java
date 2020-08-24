@@ -19,6 +19,8 @@ public class MemberService {
 	private MemberDao memberDao;
 	@Autowired
 	private MailService mailService;
+	@Autowired
+	private AttrService attrService;
 	@Value("${custom.siteMainUri}")
 	private String siteMainUri;
 	@Value("${custom.siteName}")
@@ -64,5 +66,49 @@ public class MemberService {
 	public Member getMemberByNameAndEmail(String name, String email) {
 		return memberDao.getMemberByNameAndEmail(name,email);
 	}
+
+	public void notifyTempLoginPw(Member member) {
+		String to = member.getEmail();
+		String tempPasswordOrigin = Util.getTempPassword(6);
+		String tempPassword = Util.sha256(tempPasswordOrigin);
+
+		passWordmodify(member.getId(), tempPassword);
+		attrService.setValue("member", member.getId(), "extra", "useTempPassword", "1",Util.getDateStrLater(60 * 60));
+
+		String title = String.format("[%s]님 임시패스워드 발송", member.getName());
+		String body = String.format("<div>임시 패스워드 : %s</div>\n", tempPasswordOrigin);
+		mailService.send(to, title, body);
+		
+	}
+
+	private void passWordmodify(int actorId, String loginPw) {
+		memberDao.passWordmodify(actorId, loginPw);
+
+		attrService.remove("member", actorId, "extra", "useTempPassword");
+		
+	}
+
+
+	public String genCheckPasswordAuthCode(int actorId) {
+		String authCode = UUID.randomUUID().toString();
+		attrService.setValue("member__" + actorId + "__extra__modifyPrivateAuthCode", authCode, Util.getDateStrLater(60 * 60));
+
+		return authCode;
+	}
+
+	public ResultData checkValidCheckPasswordAuthCode(int actorId, String checkPasswordAuthCode) {
+		if (attrService.getValue("member__" + actorId + "__extra__modifyPrivateAuthCode").equals(checkPasswordAuthCode)) {
+			return new ResultData("S-1", "유효한 키 입니다.");
+		}
+
+		return new ResultData("F-1", "유효하지 않은 키 입니다.");
+	}
+
+	public void infoModify(Map<String, Object> param) {
+		memberDao.infoModify(param);
+		
+	}
+
+
 
 }

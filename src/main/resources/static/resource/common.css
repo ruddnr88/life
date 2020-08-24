@@ -158,6 +158,18 @@ html>head+body:nth-child(2) .height-300 {
 	word-break: keep-all;
 }
 
+/*아이디/비번찾기 */
+.tab_menu {
+	margin-bottom: 10px;
+}
+.tab_box {
+	display: none;
+}
+
+.tab_box.on {
+	display: block;
+}
+
 /* 버튼관련 */
 .btn {
 	font-size:1rem;

@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<c:set var="pageTitle" value="비밀번호 확인" />
 <%@ include file="../part/head.jspf"%>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js"></script>
@@ -24,10 +25,10 @@
 </script>
 <!-- 비밀번호확인 메인컨텐츠 -->
 <div class="con sign-form-box">
-	<h1>비밀번호 확인</h1>
-	<form action="dopasswordForPrivate" method="POST"
+	<form action="doCheckPassword" method="POST"
 		class="table-box con form1" 
 		onsubmit="submitLoginForm(this); return false;">
+		<input type="hidden" name="redirectUri" value="${param.redirectUri}">
 		<input type="hidden" name="loginPwReal" />
 		<table>
 			<colgroup>

@@ -38,7 +38,6 @@
 function getLocation() {
 	  if (navigator.geolocation) { // GPS를 지원하면
 	    navigator.geolocation.getCurrentPosition(function(position) {
-	      alert(position.coords.latitude + ' ' + position.coords.longitude);
 	    }, function(error) {
 	      console.error(error);
 	    }, {
@@ -80,20 +79,23 @@ var param = ${paramJson};
 				</c:if>
 				
 				<ul>
-					<li><a href="/home/main" class="flex flex-jc-c">홈</a></li>
+					<li><a href="/usr/home/main" class="flex flex-jc-c">홈</a></li>
+					<li><a href="/usr/article/free-list" class="flex flex-jc-c">자유게시판</a></li>
+					<li><a href="/usr/article/notice-list" class="flex flex-jc-c">공지사항</a></li>
 					<c:if test="${isLogined}">
-					<li><a class="flex flex-jc-c" href="/member/doLogout">로그아웃</a></li>
+					<li><a class="flex flex-jc-c" href="/usr/member/doLogout">로그아웃</a></li>
+					<a class="flex flex-jc-c" href="/usr/member/checkPassword?redirectUri=${Util.getUriEncoded('/usr/member/modify')}">내 정보수정</a>
 					</c:if>
 					<c:if test="${isLogined==false}">
 					<li><a class="flex flex-jc-c"
-						href="/member/login?redirectUri=${encodedAfterLoginUri}">로그인</a></li>
-					<li><a class="flex flex-jc-c" href="/member/join">회원가입</a></li>
+						href="/usr/member/login?redirectUri=${encodedAfterLoginUri}">로그인</a></li>
+					<li><a class="flex flex-jc-c" href="/usr/member/join">회원가입</a></li>
 					</c:if>
 				</ul>
 			</nav>
 		</div>
 		<div class="top-bar con flex flex-ai-c flex-jc-sb visible-on-md-up">
-			<a href="/home/main" class="logo img-box"> <img
+			<a href="/usr/home/main" class="logo img-box"> <img
 				src="/resource/img/logo_1@3x.png" alt="" />
 			</a>
 		
@@ -103,19 +105,18 @@ var param = ${paramJson};
 				
 			</c:if>
 				<ul class="flex">
-					<li class="padding-0-10"><a href="/home/main"
-						class="btn btn-info">홈</a></li>
+					<li class="padding-0-10"><a href="/usr/home/main" class="btn btn-info">홈</a></li>
+					<li class="padding-0-10"><a href="/usr/article/free-list" class="btn btn-info">자유게시판</a></li>
+					<li class="padding-0-10"><a href="/usr/article/notice-list" class="btn btn-info">공지사항</a></li>
 					<c:if test="${isLogined}">
-					<li class="padding-0-10"><a class="btn btn-info"
-						href="/member/passwordForPrivate">회원정보</a></li>
-					<li class="padding-0-10"><a class="btn btn-info"
-						href="/member/doLogout">로그아웃</a></li>
+					<li class="padding-0-10"><a class="btn btn-info" href="/usr/member/checkPassword?redirectUri=${Util.getUriEncoded('/usr/member/modify')}">내 정보수정</a></li>
+					<li class="padding-0-10"><a class="btn btn-info" href="/usr/member/doLogout">로그아웃</a></li>
 					</c:if>
 					<c:if test="${isLogined == false}">
 					<li class="padding-0-10"><a class="btn btn-info"
-						href="/member/login?redirectUri=${encodedAfterLoginUri}">로그인</a></li>
+						href="/usr/member/login?redirectUri=${encodedAfterLoginUri}">로그인</a></li>
 					<li class="padding-0-10"><a class="btn btn-info"
-						href="/member/join">회원가입</a></li>
+						href="/usr/member/join">회원가입</a></li>
 					</c:if>
 				</ul>
 			</nav>
