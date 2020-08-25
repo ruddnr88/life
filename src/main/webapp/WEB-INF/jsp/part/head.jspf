@@ -51,10 +51,9 @@ function getLocation() {
 	}
 	getLocation();
 </script>
-
-<!--  <%="<script>"%>
+<%="<script>"%>
 var activeProfile = '${activeProfile}';
-<%="</script>"%>-->
+<%="</script>"%>
 <%="<script>"%>
 var param = ${paramJson};
 <%="</script>"%>

@@ -13,11 +13,16 @@ import com.project.rko.life.dto.Board;
 public interface ArticleDao {
 
 	Board getBoardByCode(String boardCode);
-
+	
+	//게시판 보드 아이디 받아온거임
 	List<Article> getForPrintArticles(@Param("id") int id);
 
 	Article getForPrintArticleById(int id);
 
 	void write(Map<String, Object> param);
+
+	Article getArticleById(int id);
+
+	void modify(Map<String, Object> param);
 
 }

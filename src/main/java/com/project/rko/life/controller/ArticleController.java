@@ -1,9 +1,7 @@
 package com.project.rko.life.controller;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -17,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.project.rko.life.dto.Article;
 import com.project.rko.life.dto.Board;
 import com.project.rko.life.dto.Member;
+import com.project.rko.life.dto.ResultData;
 import com.project.rko.life.service.ArticleService;
 import com.project.rko.life.util.Util;
 
@@ -87,5 +86,46 @@ public class ArticleController {
 
 		return "redirect:" + redirectUri;
 	}
+	
+	@RequestMapping("/usr/article/{boardCode}-modify")
+	public String showModify(Model model, @RequestParam Map<String, Object> param, HttpServletRequest req, @PathVariable("boardCode") String boardCode, String listUrl) {
+		model.addAttribute("listUrl", listUrl);
+		
+		Board board = articleService.getBoardByCode(boardCode);
+		model.addAttribute("board", board);
+		
+		int id = Integer.parseInt((String) param.get("id"));
+		
+		Member loginedMember = (Member)req.getAttribute("loginedMember");
+		Article article = articleService.getForPrintArticleById(loginedMember, id);
+
+		model.addAttribute("article", article);
+
+		return "article/modify";
+	}
+	@RequestMapping("/usr/article/{boardCode}-doModify")
+	public String doModify(@RequestParam Map<String, Object> param, HttpServletRequest req, int id, @PathVariable("boardCode") String boardCode, Model model) {
+		Board board = articleService.getBoardByCode(boardCode);
+		model.addAttribute("board", board);
+		Map<String, Object> newParam = Util.getNewMapOf(param, "title", "body", "fileIdsStr", "articleId", "id");
+		Member loginedMember = (Member)req.getAttribute("loginedMember");
+		
+		ResultData checkActorCanModifyResultData = articleService.checkActorCanModify(loginedMember, id);
+		
+		if (checkActorCanModifyResultData.isFail() ) {
+			model.addAttribute("historyBack", true);
+			model.addAttribute("msg", checkActorCanModifyResultData.getMsg());
+			
+			return "common/redirect";
+		}
+		
+		articleService.modify(newParam);
+		
+		String redirectUri = (String) param.get("redirectUri");
+
+		return "redirect:" + redirectUri;
+	}
+
+
 	
 }

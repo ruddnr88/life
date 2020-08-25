@@ -1,11 +1,6 @@
-server:
-  port: 8087
-  error:
-    include-exception: true
-    include-stacktrace: always
-    include-message: always
-    include-binding-errors: always
 spring:
+  profiles:
+    active: local # 기본적으로 local이 선택된다는 뜻
   mail:
     host: smtp.gmail.com
     port: 587
@@ -17,6 +12,12 @@ spring:
           auth: true
           starttls:
             enable: true
+  servlet:
+    multipart:
+      file-size-threshold: 1MB
+      location: C:\temp
+      max-file-size: 100MB
+      max-request-size: 100MB
   mvc:
     view:
       prefix: /WEB-INF/jsp/
@@ -28,9 +29,33 @@ spring:
     password: sbs123414
 mybatis:
   type-aliases-package: com.project.rko.life.dto
+server:
+  error:
+    include-exception: true
+    include-stacktrace: always
+    include-message: always
+    include-binding-errors: always
 custom:
   siteName: 오늘날씨
   siteMainUri: https://todayWeather.com/
   logoText: 오늘날씨
   emailFrom: no-reply@todayWeather.com
   emailFromName: 오늘날씨
+
+---
+
+spring:
+  profiles: local
+server:
+  port: 8087
+---
+
+spring:
+  profiles: production
+  servlet:
+    multipart:
+      location: /tmp
+  datasource:
+    username: at
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/life?useUnicode=true&characterEncoding=utf8&autoReconnect=true&serverTimezone=Asia/Seoul&useOldAliasMetadataBehavior=true&zeroDateTimeNehavior=convertToNull

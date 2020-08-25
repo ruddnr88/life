@@ -21,16 +21,18 @@ public class BeforeActionInterceptor implements HandlerInterceptor {
 	@Autowired
 	@Value("${custom.logoText}")
 	private String siteName;
+	@Value("${spring.profiles.active}")
+	private String activeProfile;
 
 	@Autowired
 	private MemberService memberService;
 
-
-//	@Autowired
-//	private AppConfig appConfig;
+	@Autowired
+	private AppConfig appConfig;
 
 	@Override
-	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
+			throws Exception {
 
 		// 기타 유용한 정보를 request에 담는다.
 		Map<String, Object> param = Util.getParamMap(request);
@@ -99,9 +101,9 @@ public class BeforeActionInterceptor implements HandlerInterceptor {
 		request.setAttribute("isLogined", isLogined);
 		request.setAttribute("loginedMember", loginedMember);
 
-//		request.setAttribute("activeProfile", activeProfile);
+		request.setAttribute("activeProfile", activeProfile);
 
-//		request.setAttribute("appConfig", appConfig);
+		request.setAttribute("appConfig", appConfig);
 
 		return HandlerInterceptor.super.preHandle(request, response, handler);
 	}
