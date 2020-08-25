@@ -11,4 +11,8 @@ public class HomeController {
 	public String showMain() {
 	return "/home/main";
 	}
+	@RequestMapping("/")
+	public String showMain2() {
+	return "/home/main";
+	}
 }

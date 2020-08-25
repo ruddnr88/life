@@ -35,6 +35,42 @@ CREATE TABLE article (
     `boardId` INT(10) UNSIGNED NOT NULL
 );
 
+# 부가정보테이블 
+# 댓글 테이블 추가
+DROP TABLE IF EXISTS attr;
+CREATE TABLE attr (
+    id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    regDate DATETIME NOT NULL,
+    updateDate DATETIME NOT NULL,
+    relTypeCode CHAR(20) NOT NULL,
+    relId INT(10) UNSIGNED NOT NULL,
+    typeCode CHAR(20) NOT NULL,
+    type2Code CHAR(20) NOT NULL,
+    `name` CHAR(100) NOT NULL UNIQUE,
+    `value` TEXT NOT NULL,
+    `expireDate` DATETIME NULL
+);
+/* 파일 테이블 생성 */
+DROP TABLE IF EXISTS `file`;
+CREATE TABLE `file` (
+    id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    regDate DATETIME,
+    updateDate DATETIME,
+    delDate DATETIME,
+	delStatus TINYINT(1) UNSIGNED NOT NULL DEFAULT 0,
+	relTypeCode CHAR(50) NOT NULL,
+	relId INT(10) UNSIGNED NOT NULL,
+    originFileName VARCHAR(100) NOT NULL,
+    fileExt CHAR(10) NOT NULL,
+    typeCode CHAR(20) NOT NULL,
+    type2Code CHAR(20) NOT NULL,
+    fileSize INT(10) UNSIGNED NOT NULL,
+    fileExtTypeCode CHAR(10) NOT NULL,
+    fileExtType2Code CHAR(10) NOT NULL,
+    fileNo TINYINT(2) UNSIGNED NOT NULL,
+    `body` LONGBLOB
+);
+
 ------ 
 
 # DB 사용자 생성

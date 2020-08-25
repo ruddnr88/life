@@ -23,7 +23,7 @@ public class MemberController {
 
 	@RequestMapping("/usr/member/join")
 	public String showjoin() {
-		return "/usrmember/join";
+		return "/member/join";
 	}
 
 	@RequestMapping("/usr/member/doJoin")
@@ -117,6 +117,8 @@ public class MemberController {
 		model.addAttribute("alertMsg", String.format("일치하는 회원을 찾았습니다. \\n아이디 : " + member.getLoginId()));
 		return "common/redirect";
 	}
+	
+
 
 	@RequestMapping("/usr/member/doFindLoginPw")
 	public String doFindLoginPw(String loginId,String name, String email, HttpSession session, Model model, String redirectUri) {
@@ -137,7 +139,6 @@ public class MemberController {
 		model.addAttribute("redirectUri", redirectUri);
 		model.addAttribute("alertMsg", String.format("가입하신 메일로 임시 패스워드가 발송되었습니다."));
 		return "common/redirect";
-		//dologin에서 임시패스워드로 로그인하게 만들어야함
 	}
 
 	@RequestMapping("/usr/member/checkPassword")
@@ -155,13 +156,11 @@ public class MemberController {
 			model.addAttribute("alertMsg", "비밀번호가 일치하지 않습니다.");
 			return "common/redirect";
 		}
-		
 		String authCode = memberService.genCheckPasswordAuthCode(loginedMember.getId());
 
 		if (redirectUri == null || redirectUri.length() == 0) {
-			redirectUri = "/usr/home/main";
+			redirectUri = "/usr/member/modify";
 		}
-
 		redirectUri = Util.getNewUri(redirectUri, "checkPasswordAuthCode", authCode);
 
 		model.addAttribute("redirectUri", redirectUri);
@@ -176,13 +175,13 @@ public class MemberController {
 
 		if (checkPasswordAuthCode == null || checkPasswordAuthCode.length() == 0) {
 			model.addAttribute("historyBack", true);
-			model.addAttribute("msg", "비밀번호 체크 인증코드가 없습니다.");
+			model.addAttribute("alertMsg", "비밀번호 체크 인증코드가 없습니다.");
 			return "common/redirect";
 		}
 
 		if (checkValidCheckPasswordAuthCodeResultData.isFail()) {
 			model.addAttribute("historyBack", true);
-			model.addAttribute("msg", checkValidCheckPasswordAuthCodeResultData.getMsg());
+			model.addAttribute("alertMsg", checkValidCheckPasswordAuthCodeResultData.getMsg());
 			return "common/redirect";
 		}
 

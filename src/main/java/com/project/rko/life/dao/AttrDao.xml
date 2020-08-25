@@ -30,14 +30,17 @@
 	<delete id="remove">
 		DELETE FROM attr
 		WHERE relId = #{relId}
-		AND relTypeCode = #{relTypeCode}
+		AND relTypeCode
+		= #{relTypeCode}
 		AND typeCode = #{typeCode}
 		AND type2Code = #{type2Code}
 	</delete>
 
 	<insert id="setValue">
-		INSERT INTO `attr` (regDate, updateDate, `relTypeCode`, `relId`, `typeCode`, `type2Code`,`value`, expireDate)
-		VALUES (NOW(), NOW(), #{relTypeCode}, #{relId}, #{typeCode}, #{type2Code}, #{value}, #{expireDate})
+		INSERT INTO `attr` (regDate, updateDate,
+		`relTypeCode`, `relId`, `typeCode`, `type2Code`,`value`, expireDate)
+		VALUES (NOW(), NOW(), #{relTypeCode}, #{relId}, #{typeCode},
+		#{type2Code}, #{value}, #{expireDate})
 		ON DUPLICATE KEY UPDATE
 		updateDate = NOW() , `value` = #{value}, expireDate = #{expireDate}
 	</insert>

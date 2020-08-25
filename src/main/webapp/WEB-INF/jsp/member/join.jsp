@@ -78,7 +78,7 @@
 
 		if (form.nickname.value.length == 0) {
 			form.nickname.focus();
-			alert('활동명을 입력해주세요.');
+			alert('닉네임을 입력해주세요.');
 
 			return;
 		}
