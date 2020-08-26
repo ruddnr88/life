@@ -75,7 +75,8 @@
 </script>
 <!-- 메인컨텐츠 -->
 <div class="con info-con">
-	<form action="doModify" method="POST" class="table-box table-box-vertical form1"
+	<form action="doModify" method="POST"
+		class="table-box table-box-vertical form1"
 		onsubmit="MemberModifyForm__submit(this); return false;">
 		<input type="hidden" name="redirectUri" value="/usr/home/main">
 		<input type="hidden" name="loginPwReal">
@@ -142,6 +143,16 @@
 						<button class="btn btn-info" type="button"
 							onclick="history.back();">취소</button>
 					</td>
+				</tr>
+				<tr class="tr-do">
+					<th>회원탈퇴</th>
+					<td>
+						<div
+							onclick="if ( confirm('정말 탈퇴하시겠습니까?') == false ) return false;">
+							<a class="btn btn-primary" href="doDelete?id=${loginedMember.id}"> 회원탈퇴</a>
+						</div>
+					</td>
+
 				</tr>
 			</tbody>
 		</table>

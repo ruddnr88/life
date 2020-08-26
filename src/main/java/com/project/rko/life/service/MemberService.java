@@ -109,6 +109,15 @@ public class MemberService {
 		
 	}
 
+	public void memberdelete(int id) {
+		memberDao.delete(id);
+		
+	}
+
+	public boolean isJoinableLoginId(String loginId) {
+		return memberDao.isJoinableLoginId(loginId);
+	}
+
 
 
 }

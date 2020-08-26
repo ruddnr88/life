@@ -17,7 +17,6 @@ import com.project.rko.life.dto.Member;
 import com.project.rko.life.dto.ResultData;
 import com.project.rko.life.util.Util;
 
-
 @Service
 public class ArticleService {
 	@Autowired
@@ -40,6 +39,7 @@ public class ArticleService {
 	// 게시물 아이디로 가져오기(상세보기)
 	public Article getForPrintArticleById(Member actor, int id) {
 		Article article = articleDao.getForPrintArticleById(id);
+
 		updateForPrintInfo(actor, article);
 
 		List<File> files = fileService.getFiles("article", article.getId(), "common", "attachment");
@@ -51,13 +51,24 @@ public class ArticleService {
 		}
 
 		Util.putExtraVal(article, "file__common__attachment", filesMap);
+
 		return article;
 	}
 
 	private void updateForPrintInfo(Member actor, Article article) {
 		Util.putExtraVal(article, "actorCanDelete", actorCanDelete(actor, article));
 		Util.putExtraVal(article, "actorCanModify", actorCanModify(actor, article));
-		
+
+	}
+
+	// 액터가 해당 댓글을 수정할 수 있는지 알려준다.
+	public boolean actorCanModify(Member actor, Article article) {
+		return actor != null && actor.getId() == article.getMemberId() ? true : false;
+	}
+
+	// 액터가 해당 댓글을 삭제할 수 있는지 알려준다.
+	public boolean actorCanDelete(Member actor, Article article) {
+		return actorCanModify(actor, article);
 	}
 
 	// 글쓰기
@@ -74,7 +85,6 @@ public class ArticleService {
 				fileIdsStr = fileIdsStr.substring(1);
 			}
 		}
-
 		if (fileIdsStr != null && fileIdsStr.length() > 0) {
 			fileIdsStr = fileIdsStr.trim();
 
@@ -82,9 +92,9 @@ public class ArticleService {
 				fileIdsStr = "";
 			}
 		}
-
 		if (fileIdsStr != null && fileIdsStr.length() > 0) {
-			List<Integer> fileIds = Arrays.asList(fileIdsStr.split(",")).stream().map(s -> Integer.parseInt(s.trim())).collect(Collectors.toList());
+			List<Integer> fileIds = Arrays.asList(fileIdsStr.split(",")).stream().map(s -> Integer.parseInt(s.trim()))
+					.collect(Collectors.toList());
 
 			// 파일이 먼저 생성된 후에, 관련 데이터가 생성되는 경우에는, file의 relId가 일단 0으로 저장된다.
 			// 그것을 뒤늦게라도 이렇게 고처야 한다.
@@ -96,19 +106,10 @@ public class ArticleService {
 		return id;
 
 	}
+
 	public boolean actorCanModify(Member actor, int id) {
 		Article article = articleDao.getArticleById(id);
 
-		return actorCanModify(actor, article);
-	}
-
-	// 액터가 해당 댓글을 수정할 수 있는지 알려준다.
-	public boolean actorCanModify(Member actor, Article article) {
-		return actor != null && actor.getId() == article.getMemberId() ? true : false;
-	}
-
-	// 액터가 해당 댓글을 삭제할 수 있는지 알려준다.
-	public boolean actorCanDelete(Member actor, Article article) {
 		return actorCanModify(actor, article);
 	}
 
@@ -122,7 +123,7 @@ public class ArticleService {
 		return new ResultData("F-1", "권한이 없습니다.", "id", id);
 	}
 
-	//글수정
+	// 글수정
 	public void modify(Map<String, Object> param) {
 		articleDao.modify(param);
 

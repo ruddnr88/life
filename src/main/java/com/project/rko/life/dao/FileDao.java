@@ -10,8 +10,8 @@ import com.project.rko.life.dto.File;
 
 @Mapper
 public interface FileDao {
-void save(Map<String, Object> param);
-	
+	void save(Map<String, Object> param);
+
 	void update(Map<String, Object> param);
 
 	void changeRelId(@Param("id") int id, @Param("relId") int relId);

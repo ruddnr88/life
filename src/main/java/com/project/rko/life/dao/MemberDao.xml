@@ -9,6 +9,12 @@
 		FROM member
 		WHERE loginId = #{loginId}
 	</select>
+	<select id="isJoinableLoginId" resultType="int">
+		SELECT COUNT(*) AS
+		cnt
+		FROM member
+		WHERE loginId = #{loginId}
+	</select>
 	<select id="getMemberById" resultType="Member">
 		SELECT *
 		FROM member
@@ -44,6 +50,13 @@
 		SET updateDate = NOW(),
 		loginPw = #{loginPw}
 		WHERE id = #{actorId}
+	</update>
+	<update id="delete">
+		UPDATE `member`
+		SET delDate = NOW(),
+		updateDate = NOW(),
+		delStatus = 1
+		WHERE id = #{id}
 	</update>
 	<update id="infoModify">
 		UPDATE member

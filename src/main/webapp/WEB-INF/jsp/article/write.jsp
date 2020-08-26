@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <c:set var="pageTitle" value="${board.name} 게시물 작성" />
@@ -6,6 +6,7 @@
 <%@ include file="../part/toastuiEditor.jspf"%>
 <script>
 	function ArticleWriteForm__submit(form) {
+		
 		form.title.value = form.title.value.trim();
 
 		if (form.title.value.length == 0) {
@@ -14,6 +15,7 @@
 
 			return;
 		}
+
 		var bodyEditor = $(form).find('.toast-editor.input-body').data('data-toast-editor');
 
 		var body = bodyEditor.getMarkdown().trim();
@@ -96,12 +98,13 @@
 			if (bodyEditor.inBodyFileIdsStr) {
 				form.fileIdsStr.value += bodyEditor.inBodyFileIdsStr;
 			}
+	
 
 			form.submit();
 		});
 	}
 </script>
-<form method="POST" class="table-box con form1" action="${board.code}-doWrite" onsubmit="ArticleWriteForm__submit(this); return false;">
+<form method="POST" class="table-box table-box-vertical con form1" action="${board.code}-doWrite" onsubmit="ArticleWriteForm__submit(this); return false;">
 	<input type="hidden" name="fileIdsStr" />
 	<input type="hidden" name="body" />
 	<input type="hidden" name="redirectUri" value="/usr/article/${board.code}-detail?id=#id">
@@ -109,6 +112,7 @@
 	<table>
 		<colgroup>
 			<col class="table-first-col">
+			<col />
 		</colgroup>
 		<tbody>
 			<tr>
@@ -162,5 +166,4 @@ https://www.youtube.com/watch?v=LmgWxezH7cc
 		</tbody>
 	</table>
 </form>
-
 <%@ include file="../part/foot.jspf"%>

@@ -58,6 +58,7 @@ public class ArticleController {
 
 		return "article/detail";
 	}
+	//글쓰기이동
 	@RequestMapping("/usr/article/{boardCode}-write")
 	public String showWrite(@PathVariable("boardCode") String boardCode, Model model, String listUrl) {
 		if ( listUrl == null ) {
@@ -69,7 +70,7 @@ public class ArticleController {
 		
 		return "article/write";
 	}
-	
+	//글작성
 	@RequestMapping("/usr/article/{boardCode}-doWrite")
 	public String doWrite(@RequestParam Map<String, Object> param, HttpServletRequest req, @PathVariable("boardCode") String boardCode, Model model) {
 		Board board = articleService.getBoardByCode(boardCode);
@@ -114,7 +115,7 @@ public class ArticleController {
 		
 		if (checkActorCanModifyResultData.isFail() ) {
 			model.addAttribute("historyBack", true);
-			model.addAttribute("msg", checkActorCanModifyResultData.getMsg());
+			model.addAttribute("alertMsg", checkActorCanModifyResultData.getMsg());
 			
 			return "common/redirect";
 		}

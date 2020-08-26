@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<c:set var="pageTitle" value="${board.name} 게시물 상세내용" />
+<c:set var="pageTitle" value="${board.name} 게시물 수정" />
 <%@ include file="../part/head.jspf"%>
 <%@ include file="../part/toastuiEditor.jspf"%>
 
@@ -186,7 +186,7 @@
 				<td>
 					<div class="form-control-box">
 						<script type="text/x-template">${article.body}</script>
-						<div data-relTypeCode="artile" data-relId="${article.id}" class="toast-editor input-body"></div>
+						<div data-relTypeCode="article" data-relId="${article.id}" class="toast-editor input-body"></div>
 					</div>
 				</td>
 			</tr>

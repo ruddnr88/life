@@ -24,6 +24,10 @@ public interface MemberDao {
 
 	void infoModify(Map<String, Object> param);
 
+	void delete(@Param("id") int id);
+
+	boolean isJoinableLoginId(@Param("loginId") String loginId);
+
 
 
 }
