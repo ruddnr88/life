@@ -26,8 +26,4 @@ public interface MemberDao {
 
 	void delete(@Param("id") int id);
 
-	boolean isJoinableLoginId(@Param("loginId") String loginId);
-
-
-
 }

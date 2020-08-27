@@ -1,8 +1,10 @@
 package com.project.rko.life.controller;
 
+import java.io.IOException;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,6 +51,15 @@ public class MemberController {
 		return "/home/main";
 	}
 
+	@RequestMapping("/usr/member/getLoginIdDup")
+	private ResultData doLoginIdDup(String loginId, Model model, HttpServletResponse response) throws IOException {
+
+		ResultData isJoinableLoginId = memberService.checkLoginIdJoinable(loginId);
+		
+	
+		System.out.println("가입된아이디찾긔~! :" + isJoinableLoginId);
+		return isJoinableLoginId;
+	}
 
 	// 로그인이동
 	@RequestMapping("/usr/member/login")

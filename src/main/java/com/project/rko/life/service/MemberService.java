@@ -34,6 +34,7 @@ public class MemberService {
 		int count = memberDao.getLoginIdDupCount(loginId);
 
 		if (count == 0) {
+			
 			return new ResultData("S-1", "가입가능한 로그인 아이디 입니다.", "loginId", loginId);
 		}
 
@@ -113,11 +114,6 @@ public class MemberService {
 		memberDao.delete(id);
 		
 	}
-
-	public boolean isJoinableLoginId(String loginId) {
-		return memberDao.isJoinableLoginId(loginId);
-	}
-
 
 
 }

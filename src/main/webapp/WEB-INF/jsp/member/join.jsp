@@ -9,6 +9,7 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js"></script>
 
 <script>
+	var MemberJoinForm__validLoginId = '';
 	var MemberJoinForm__submitDone = false;
 	function MemberJoinForm__submit(form) {
 		if (MemberJoinForm__submitDone) {
@@ -32,6 +33,12 @@
 			form.loginId.focus();
 			alert('로그인 아이디 4자 이상 입력해주세요.');
 
+			return;
+		}
+		
+		if (form.loginId.value != MemberJoinForm__validLoginId) {
+			alert('다른 아이디를 입력해주세요.');
+			form.loginId.focus();
 			return;
 		}
 
@@ -99,6 +106,27 @@
 		form.submit();
 		MemberJoinForm__submitDone = true;
 	}
+	function MemberJoinForm__checkLoginIdDup(input) {
+		var form = input.form;
+		form.loginId.value = form.loginId.value.trim();
+		
+		if (form.loginId.value.length == 0) {
+			return;
+		}
+		$.get('getLoginIdDup', {
+			loginId : form.loginId.value
+		}, function(data) {
+			var $message = $(form.loginId).next();
+			
+			 if( data.resultCode.substr(0,2) == 'S-') {
+				 $message.empty().append('<div class="loginDup" style="color:green;">' + data.msg + '</div>');
+				 MemberJoinForm__validLoginId = data.loginId;
+			} else {
+				 $message.empty().append('<div class="loginDup" style="color:red;">' + data.msg + '</div>');
+				 MemberJoinForm__validLoginId = '';
+			}
+		}, 'json');
+	}
 </script>
 <form method="POST" class="table-box con form1" action="doJoin"
 	onsubmit="MemberJoinForm__submit(this); return false;">
@@ -114,8 +142,8 @@
 				<th>로그인 아이디</th>
 				<td>
 					<div class="form-control-box">
-						<input type="text" placeholder="로그인 아이디 입력해주세요." name="loginId"
-							maxlength="30" />
+						<input onkeyup="MemberJoinForm__checkLoginIdDup(this);" type="text" placeholder="로그인 아이디 입력해주세요." name="loginId" maxlength="30"/>
+						<div class="message-msg"></div>
 					</div>
 				</td>
 			</tr>

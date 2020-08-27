@@ -6,7 +6,10 @@
 <%@ include file="../part/toastuiEditor.jspf"%>
 <script>
 	function ArticleWriteForm__submit(form) {
-		
+		if (isNowLoading()) {
+			alert('처리중입니다.');
+			return;
+		}		
 		form.title.value = form.title.value.trim();
 
 		if (form.title.value.length == 0) {
