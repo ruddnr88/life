@@ -86,7 +86,7 @@ public class BeforeActionInterceptor implements HandlerInterceptor {
 		request.setAttribute("logoText", this.siteName);
 		HttpSession session = request.getSession();
 
-		// 로그인 여부에 관련된 정보를 request에 담는다.
+		// 로그인 여부에 관련된 정보를 request에 담는다.0
 		boolean isLogined = false;
 		int loginedMemberId = 0;
 		Member loginedMember = null;

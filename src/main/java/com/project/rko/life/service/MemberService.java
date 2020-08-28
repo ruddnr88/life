@@ -115,5 +115,18 @@ public class MemberService {
 		
 	}
 
+	public boolean isNeedToChangePasswordForTemp(int actorId) {
+		return attrService.getValue("member", actorId, "extra", "useTempPassword").equals("1");
+	}
+	
+	public Member getMemberByIdForSession(int actorId) {
+		Member member = getMemberById(actorId);
+
+		boolean isNeedToChangePasswordForTemp = isNeedToChangePasswordForTemp(member.getId());
+		member.getExtra().put("isNeedToChangePasswordForTemp", isNeedToChangePasswordForTemp);
+
+		return member;
+	}
+
 
 }

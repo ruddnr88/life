@@ -51,12 +51,12 @@ public class MemberController {
 		return "/home/main";
 	}
 
+	// 아이디 중복체크~!
 	@RequestMapping("/usr/member/getLoginIdDup")
 	private ResultData doLoginIdDup(String loginId, Model model, HttpServletResponse response) throws IOException {
 
 		ResultData isJoinableLoginId = memberService.checkLoginIdJoinable(loginId);
-		
-	
+
 		System.out.println("가입된아이디찾긔~! :" + isJoinableLoginId);
 		return isJoinableLoginId;
 	}
@@ -93,6 +93,10 @@ public class MemberController {
 		}
 
 		session.setAttribute("loginedMemberId", member.getId());
+		boolean isNeedToChangePasswordForTemp = memberService.isNeedToChangePasswordForTemp(member.getId());
+		if (isNeedToChangePasswordForTemp) {
+			model.addAttribute("alertMsg", "현재 임시패스워드를 사용중입니다. 비밀번호를 변경해주세요.");
+		}
 
 		if (redirectUri == null || redirectUri.length() == 0) {
 
@@ -222,7 +226,7 @@ public class MemberController {
 
 	// 내정보수정하기
 	@RequestMapping("/usr/member/doModify")
-	public String doModify(@RequestParam Map<String, Object> param, Model model, HttpServletRequest req) {
+	public String doModify(@RequestParam Map<String, Object> param, Model model, HttpServletRequest req,HttpSession session) {
 		Util.changeMapKey(param, "loginPwReal", "loginPw");
 
 		int loginedMemberId = (int) req.getAttribute("loginedMemberId");
@@ -231,6 +235,17 @@ public class MemberController {
 
 		String redirectUri = (String) param.get("redirectUri");
 		model.addAttribute("redirectUri", redirectUri);
+		
+		
+		
+		session.removeAttribute("loginedMemberId");
+
+		if (redirectUri == null || redirectUri.length() == 0) {
+			redirectUri = "/usr/home/main";
+		}
+
+		model.addAttribute("redirectUri", redirectUri);
+		model.addAttribute("alertMsg", String.format("회원정보가 수정되어 로그아웃되었습니다. 다시 로그인해주세요."));
 
 		return "common/redirect";
 	}

@@ -36,12 +36,6 @@
 			return;
 		}
 		
-		if (form.loginId.value != MemberJoinForm__validLoginId) {
-			alert('다른 아이디를 입력해주세요.');
-			form.loginId.focus();
-			return;
-		}
-
 		form.loginPw.value = form.loginPw.value.trim();
 
 		if (form.loginPw.value.length == 0) {
@@ -113,6 +107,7 @@
 		if (form.loginId.value.length == 0) {
 			return;
 		}
+	
 		$.get('getLoginIdDup', {
 			loginId : form.loginId.value
 		}, function(data) {
@@ -127,12 +122,12 @@
 			}
 		}, 'json');
 	}
+	
 </script>
 <form method="POST" class="table-box con form1" action="doJoin"
 	onsubmit="MemberJoinForm__submit(this); return false;">
 	<input type="hidden" name="redirectUri" value="/member/login">
 	<input type="hidden" name="loginPwReal">
-
 	<table>
 		<colgroup>
 			<col width="100">
