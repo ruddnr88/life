@@ -149,7 +149,7 @@
 					<td>
 						<div
 							onclick="if ( confirm('정말 탈퇴하시겠습니까?') == false ) return false;">
-							<a class="btn btn-primary" href="doDelete?id=${loginedMember.id}"> 회원탈퇴</a>
+							<a class="btn btn-primary" href="doDelete"> 회원탈퇴</a>
 						</div>
 					</td>
 

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.project.rko.life.dto.Member;
 import com.project.rko.life.dto.ResultData;
@@ -53,12 +54,12 @@ public class MemberController {
 
 	// 아이디 중복체크~!
 	@RequestMapping("/usr/member/getLoginIdDup")
-	private ResultData doLoginIdDup(String loginId, Model model, HttpServletResponse response) throws IOException {
+	@ResponseBody
+	private ResultData doLoginIdDup(HttpServletRequest request) {
 
-		ResultData isJoinableLoginId = memberService.checkLoginIdJoinable(loginId);
+		String isJoinableLoginId = request.getParameter("loginId");
 
-		System.out.println("가입된아이디찾긔~! :" + isJoinableLoginId);
-		return isJoinableLoginId;
+		return memberService.checkLoginIdJoinable(isJoinableLoginId);
 	}
 
 	// 로그인이동
@@ -92,7 +93,9 @@ public class MemberController {
 			return "common/redirect";
 		}
 
+		// 로그인유지
 		session.setAttribute("loginedMemberId", member.getId());
+
 		boolean isNeedToChangePasswordForTemp = memberService.isNeedToChangePasswordForTemp(member.getId());
 		if (isNeedToChangePasswordForTemp) {
 			model.addAttribute("alertMsg", "현재 임시패스워드를 사용중입니다. 비밀번호를 변경해주세요.");
@@ -226,7 +229,8 @@ public class MemberController {
 
 	// 내정보수정하기
 	@RequestMapping("/usr/member/doModify")
-	public String doModify(@RequestParam Map<String, Object> param, Model model, HttpServletRequest req,HttpSession session) {
+	public String doModify(@RequestParam Map<String, Object> param, Model model, HttpServletRequest req,
+			HttpSession session) {
 		Util.changeMapKey(param, "loginPwReal", "loginPw");
 
 		int loginedMemberId = (int) req.getAttribute("loginedMemberId");
@@ -235,9 +239,7 @@ public class MemberController {
 
 		String redirectUri = (String) param.get("redirectUri");
 		model.addAttribute("redirectUri", redirectUri);
-		
-		
-		
+
 		session.removeAttribute("loginedMemberId");
 
 		if (redirectUri == null || redirectUri.length() == 0) {
@@ -252,17 +254,17 @@ public class MemberController {
 
 	// 회원탈퇴
 	@RequestMapping("/usr/member/doDelete")
-	public String doDelete(int id, HttpSession session, Model model, String redirectUri) {
+	public String doDelete(HttpSession session, Model model, String redirectUri, HttpServletRequest req) {
+		int memberId = (int) req.getAttribute("loginedMemberId");
 		session.removeAttribute("loginedMemberId");
-		memberService.memberdelete(id);
+		memberService.memberdelete(memberId);
 
 		if (redirectUri == null || redirectUri.length() == 0) {
 			redirectUri = "/usr/home/main";
 		}
-
 		model.addAttribute("redirectUri", redirectUri);
 		model.addAttribute("alertMsg", String.format("회원탈퇴 되었습니다."));
-		return "home/main";
+		return "common/redirect";
 	}
 
 }

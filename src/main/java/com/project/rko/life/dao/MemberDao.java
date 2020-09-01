@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import com.project.rko.life.dto.Member;
+import com.project.rko.life.dto.ResultData;
 
 @Mapper
 public interface MemberDao {
@@ -25,5 +26,7 @@ public interface MemberDao {
 	void infoModify(Map<String, Object> param);
 
 	void delete(@Param("id") int id);
+
+	boolean isJoinableLoginId(String loginId);
 
 }

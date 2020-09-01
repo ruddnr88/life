@@ -107,12 +107,10 @@
 		if (form.loginId.value.length == 0) {
 			return;
 		}
-	
 		$.get('getLoginIdDup', {
 			loginId : form.loginId.value
 		}, function(data) {
 			var $message = $(form.loginId).next();
-			
 			 if( data.resultCode.substr(0,2) == 'S-') {
 				 $message.empty().append('<div class="loginDup" style="color:green;">' + data.msg + '</div>');
 				 MemberJoinForm__validLoginId = data.loginId;
@@ -121,6 +119,8 @@
 				 MemberJoinForm__validLoginId = '';
 			}
 		}, 'json');
+		
+		
 	}
 	
 </script>

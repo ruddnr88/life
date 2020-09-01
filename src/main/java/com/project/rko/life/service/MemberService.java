@@ -32,12 +32,9 @@ public class MemberService {
 
 	public ResultData checkLoginIdJoinable(String loginId) {
 		int count = memberDao.getLoginIdDupCount(loginId);
-
 		if (count == 0) {
-			
 			return new ResultData("S-1", "가입가능한 로그인 아이디 입니다.", "loginId", loginId);
 		}
-
 		return new ResultData("F-1", "이미 사용중인 로그인 아이디 입니다.", "loginId", loginId);
 	}
 
@@ -126,6 +123,11 @@ public class MemberService {
 		member.getExtra().put("isNeedToChangePasswordForTemp", isNeedToChangePasswordForTemp);
 
 		return member;
+	}
+
+	public boolean isJoinableLoginId(String loginId) {
+		
+		return memberDao.isJoinableLoginId(loginId);
 	}
 
 
