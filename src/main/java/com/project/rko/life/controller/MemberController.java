@@ -53,6 +53,8 @@ public class MemberController {
 	}
 
 	// 아이디 중복체크~!
+	// ajax로 정보를 받아오려면 무조건 application/json를 설정해야하고  
+	// ResponseBody를 써야 jsp에서 받아올수있다. 
 	@RequestMapping("/usr/member/getLoginIdDup")
 	@ResponseBody
 	private ResultData doLoginIdDup(HttpServletRequest request) {
@@ -95,19 +97,22 @@ public class MemberController {
 
 		// 로그인유지
 		session.setAttribute("loginedMemberId", member.getId());
-
-		boolean isNeedToChangePasswordForTemp = memberService.isNeedToChangePasswordForTemp(member.getId());
-		if (isNeedToChangePasswordForTemp) {
-			model.addAttribute("alertMsg", "현재 임시패스워드를 사용중입니다. 비밀번호를 변경해주세요.");
-		}
-
 		if (redirectUri == null || redirectUri.length() == 0) {
-
 			redirectUri = "/usr/home/main";
 		}
 
+		boolean isNeedToChangePasswordForTemp = memberService.isNeedToChangePasswordForTemp(member.getId());
+		
+		if (isNeedToChangePasswordForTemp) {
+			redirectUri = "/usr/member/checkPassword?redirectUri=%2Fusr%2Fmember%2Fmodify";
+			model.addAttribute("alertMsg", "현재 임시패스워드를 사용중입니다. 비밀번호를 변경해주세요.");
+		} else {
+			model.addAttribute("alertMsg", String.format("%s님 환영합니다.", member.getNickname()));	
+		}
+
+
 		model.addAttribute("redirectUri", redirectUri);
-		model.addAttribute("alertMsg", String.format("%s님 반갑습니다.", member.getNickname()));
+		
 
 		return "common/redirect";
 	}
@@ -158,9 +163,14 @@ public class MemberController {
 			String redirectUri) {
 		Member member = memberService.getMemberByLoginId(loginId);
 
-		if (member == null || member.getEmail().equals(email) == false) {
+		if (member == null) {
 			model.addAttribute("historyBack", true);
 			model.addAttribute("alertMsg", "존재하지 않는 회원입니다.");
+			return "common/redirect";
+		}
+		if (member.getEmail().equals(email) == false) {
+			model.addAttribute("historyBack", true);
+			model.addAttribute("alertMsg", "이메일이 올바르지 않습니다.");
 			return "common/redirect";
 		}
 

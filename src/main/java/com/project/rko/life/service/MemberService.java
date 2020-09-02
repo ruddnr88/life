@@ -104,7 +104,14 @@ public class MemberService {
 
 	public void infoModify(Map<String, Object> param) {
 		memberDao.infoModify(param);
+		if (param.get("loginPw") != null) {
+			setNotUsingTempPassword(Util.getAsInt(param.get("id")));
+		}
 		
+	}
+
+	private void setNotUsingTempPassword(int id) {
+		attrService.remove("member", id, "extra", "usingTempPassword");
 	}
 
 	public void memberdelete(int id) {
@@ -112,8 +119,14 @@ public class MemberService {
 		
 	}
 
-	public boolean isNeedToChangePasswordForTemp(int actorId) {
-		return attrService.getValue("member", actorId, "extra", "useTempPassword").equals("1");
+	public boolean isNeedToChangePasswordForTemp(int id) {
+		String value = attrService.getValue("member", id, "extra", "usingTempPassword");
+
+		if (value == null || value.equals("1") == false) {
+			return false;
+		}
+
+		return true;
 	}
 	
 	public Member getMemberByIdForSession(int actorId) {

@@ -27,7 +27,7 @@
 <!-- 공통 JS -->
 <script src="/resource/app.js"></script>
 <script>
-function getLocation() {
+/* function getLocation() {
 	  if (navigator.geolocation) { // GPS를 지원하면
 	    navigator.geolocation.getCurrentPosition(function(position) {
 	    }, function(error) {
@@ -41,7 +41,7 @@ function getLocation() {
 	    alert('GPS를 지원하지 않습니다');
 	  }
 	}
-	getLocation();
+	getLocation(); */
 </script>
 <%="<script>"%>
 var activeProfile = '${activeProfile}';
