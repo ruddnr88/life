@@ -1,5 +1,6 @@
 package com.project.rko.life.service;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
@@ -65,28 +66,6 @@ public class MemberService {
 		return memberDao.getMemberByNameAndEmail(name,email);
 	}
 
-	public void notifyTempLoginPw(Member member) {
-		String to = member.getEmail();
-		String tempPasswordOrigin = Util.getTempPassword(6);
-		String tempPassword = Util.sha256(tempPasswordOrigin);
-
-		passWordmodify(member.getId(), tempPassword);
-		attrService.setValue("member", member.getId(), "extra", "useTempPassword", "1",Util.getDateStrLater(60 * 60));
-
-		String title = String.format("[%s]님 임시패스워드 발송", member.getName());
-		String body = String.format("<div>임시 패스워드 : %s</div>\n", tempPasswordOrigin);
-		mailService.send(to, title, body);
-		
-	}
-
-	private void passWordmodify(int actorId, String loginPw) {
-		memberDao.passWordmodify(actorId, loginPw);
-
-		attrService.remove("member", actorId, "extra", "useTempPassword");
-		
-	}
-
-
 	public String genCheckPasswordAuthCode(int actorId) {
 		String authCode = UUID.randomUUID().toString();
 		attrService.setValue("member__" + actorId + "__extra__modifyPrivateAuthCode", authCode, Util.getDateStrLater(60 * 60));
@@ -102,8 +81,10 @@ public class MemberService {
 		return new ResultData("F-1", "유효하지 않은 키 입니다.");
 	}
 
+	//회원정보변경
 	public void infoModify(Map<String, Object> param) {
 		memberDao.infoModify(param);
+		
 		if (param.get("loginPw") != null) {
 			setNotUsingTempPassword(Util.getAsInt(param.get("id")));
 		}
@@ -141,6 +122,47 @@ public class MemberService {
 	public boolean isJoinableLoginId(String loginId) {
 		
 		return memberDao.isJoinableLoginId(loginId);
+	}
+
+	//임시패스워드발송(쌤꺼)
+	public ResultData sendTempLoginPwToEmail(Member actor) {
+		String title = "[" + siteName + "] 임시 패스워드 발송";
+		String tempPassword = Util.getTempPassword(6);
+		String body = "<h1>임시 패스워드 : " + tempPassword + "</h1>";
+		body += "<a href=\"" + siteMainUri + "/usr/member/login\" target=\"_blank\">로그인 하러가기</a>";
+
+		ResultData sendResultData = mailService.send(actor.getEmail(), title, body);
+
+		if (sendResultData.isFail()) {
+			return sendResultData;
+		}
+		setTempPassword(actor, tempPassword);
+
+		return new ResultData("S-1", "계정의 이메일주소로 임시 패스워드가 발송되었습니다.");
+	}
+
+	private void setTempPassword(Member actor, String tempPassword) {
+
+		Map<String, Object> modifyParam = new HashMap<>();
+		modifyParam.put("id", actor.getId());
+		modifyParam.put("loginPw", Util.sha256(tempPassword));
+		infoModify(modifyParam);
+
+		setUsingTempPassword(actor.getId());
+	}
+
+	public boolean usingTempPassword(int id) {
+		String value = attrService.getValue("member", id, "extra", "usingTempPassword");
+
+		if (value == null || value.equals("1") == false) {
+			return false;
+		}
+
+		return true;
+	}
+
+	private void setUsingTempPassword(int id) {
+		attrService.setValue("member", id, "extra", "usingTempPassword", "1", null);
 	}
 
 

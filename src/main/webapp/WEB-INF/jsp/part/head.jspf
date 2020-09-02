@@ -7,16 +7,22 @@
 <meta charset="UTF-8">
 <title>${logoText}-${pageTitle}</title>
 <!-- 모바일에서 사이트가 PC에서의 픽셀크기 기준으로 작동하게 하기(반응형 하려면 필요) -->
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <!-- 구글 폰트 불러오기 -->
 <!-- rotobo(400/700), notosanskr(400/700) -->
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&family=Roboto:wght@400;700&display=swap"
+	rel="stylesheet">
 <!-- 폰트어썸 불러오기 -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css">
 <!-- 제이쿼리 불러오기 -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <!-- lodash 불러오기 -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.20/lodash.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.20/lodash.min.js"></script>
 <!-- 공통(라이브러리) CSS -->
 <link rel="stylesheet" href="/resource/common.css" />
 <!-- 공통(라이브러리) JS -->
@@ -27,21 +33,21 @@
 <!-- 공통 JS -->
 <script src="/resource/app.js"></script>
 <script>
-/* function getLocation() {
-	  if (navigator.geolocation) { // GPS를 지원하면
-	    navigator.geolocation.getCurrentPosition(function(position) {
-	    }, function(error) {
-	      console.error(error);
-	    }, {
-	      enableHighAccuracy: false,
-	      maximumAge: 0,
-	      timeout: Infinity
-	    });
-	  } else {
-	    alert('GPS를 지원하지 않습니다');
-	  }
-	}
-	getLocation(); */
+	/* function getLocation() {
+	 if (navigator.geolocation) { // GPS를 지원하면
+	 navigator.geolocation.getCurrentPosition(function(position) {
+	 }, function(error) {
+	 console.error(error);
+	 }, {
+	 enableHighAccuracy: false,
+	 maximumAge: 0,
+	 timeout: Infinity
+	 });
+	 } else {
+	 alert('GPS를 지원하지 않습니다');
+	 }
+	 }
+	 getLocation(); */
 </script>
 <%="<script>"%>
 var activeProfile = '${activeProfile}';
@@ -76,28 +82,30 @@ var param = ${paramJson};
 		</div>
 		<div class="mobile-side-bar flex flex-ai-c">
 			<nav class="menu-box-1 flex-1-0-0">
-				<c:if test="${isLogined}">
+				<div class="m_loginmember">
+					<c:if test="${isLogined}">
 					${loginedMember.nickname}님 환영합니다.
 					<c:if test="${loginedMember.extra.isNeedToChangePasswordForTemp}">
-			<div class="con">
-				현재 임시 비밀번호를 사용하고 있습니다. 비밀번호를 <a style="color:red" href="../member/checkPassword?redirectUri=${Util.getUriEncoded('/usr/member/modify')}">변경</a>해주세요.
-			</div>
-		</c:if>
-					
-				</c:if>
-				
+							<div class="con">
+								현재 임시 비밀번호를 사용하고 있습니다. 비밀번호를 <a style="color: red"
+									href="../member/checkPassword?redirectUri=${Util.getUriEncoded('/usr/member/modify')}">변경</a>해주세요.
+							</div>
+						</c:if>
+					</c:if>
+				</div>
 				<ul>
 					<li><a href="/usr/home/main" class="flex flex-jc-c">홈</a></li>
 					<li><a href="/usr/article/free-list" class="flex flex-jc-c">자유게시판</a></li>
 					<li><a href="/usr/article/notice-list" class="flex flex-jc-c">공지사항</a></li>
 					<c:if test="${isLogined}">
-					<li><a class="flex flex-jc-c" href="/usr/member/doLogout">로그아웃</a></li>
-					<a class="flex flex-jc-c" href="/usr/member/checkPassword?redirectUri=${Util.getUriEncoded('/usr/member/modify')}">내 정보수정</a>
+						<li><a class="flex flex-jc-c" href="/usr/member/doLogout">로그아웃</a></li>
+						<li><a class="flex flex-jc-c"
+							href="/usr/member/checkPassword?redirectUri=${Util.getUriEncoded('/usr/member/modify')}">정보수정</a></li>
 					</c:if>
 					<c:if test="${isLogined==false}">
-					<li><a class="flex flex-jc-c"
-						href="/usr/member/login?redirectUri=${encodedAfterLoginUri}">로그인</a></li>
-					<li><a class="flex flex-jc-c" href="/usr/member/join">회원가입</a></li>
+						<li><a class="flex flex-jc-c"
+							href="/usr/member/login?redirectUri=${encodedAfterLoginUri}">로그인</a></li>
+						<li><a class="flex flex-jc-c" href="/usr/member/join">회원가입</a></li>
 					</c:if>
 				</ul>
 			</nav>
@@ -106,25 +114,31 @@ var param = ${paramJson};
 			<a href="/usr/home/main" class="logo img-box"> <img
 				src="/resource/img/logo_1@3x.png" alt="" />
 			</a>
-		
+
 			<nav class="menu-box-1">
-			<c:if test="${isLogined}">
+				<div class="loginmember">
+				<c:if test="${isLogined}">
 				${loginedMember.nickname}님 환영합니다.
-				
-			</c:if>
+				</c:if>
+				</div>
 				<ul class="flex">
-					<li class="padding-0-10"><a href="/usr/home/main" class="btn btn-info">홈</a></li>
-					<li class="padding-0-10"><a href="/usr/article/free-list" class="btn btn-info">자유게시판</a></li>
-					<li class="padding-0-10"><a href="/usr/article/notice-list" class="btn btn-info">공지사항</a></li>
+					<li class="padding-0-10"><a href="/usr/home/main"
+						class="btn_main">홈</a></li>
+					<li class="padding-0-10"><a href="/usr/article/free-list"
+						class="btn_main">자유게시판</a></li>
+					<li class="padding-0-10"><a href="/usr/article/notice-list"
+						class="btn_main">공지사항</a></li>
 					<c:if test="${isLogined}">
-					<li class="padding-0-10"><a class="btn btn-info" href="/usr/member/checkPassword?redirectUri=${Util.getUriEncoded('/usr/member/modify')}">내 정보수정</a></li>
-					<li class="padding-0-10"><a class="btn btn-info" href="/usr/member/doLogout">로그아웃</a></li>
+						<li class="padding-0-10"><a class="btn_main"
+							href="/usr/member/checkPassword?redirectUri=${Util.getUriEncoded('/usr/member/modify')}">정보수정</a></li>
+						<li class="padding-0-10"><a class="btn_main"
+							href="/usr/member/doLogout">로그아웃</a></li>
 					</c:if>
 					<c:if test="${isLogined == false}">
-					<li class="padding-0-10"><a class="btn btn-info"
-						href="/usr/member/login?redirectUri=${encodedAfterLoginUri}">로그인</a></li>
-					<li class="padding-0-10"><a class="btn btn-info"
-						href="/usr/member/join">회원가입</a></li>
+						<li class="padding-0-10"><a class="btn_main"
+							href="/usr/member/login?redirectUri=${encodedAfterLoginUri}">로그인</a></li>
+						<li class="padding-0-10"><a class="btn_main"
+							href="/usr/member/join">회원가입</a></li>
 					</c:if>
 				</ul>
 			</nav>
