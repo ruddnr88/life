@@ -7,6 +7,8 @@ body, ul, li {
     list-style: none;
 }
 
+
+
 a {
     color: inherit;
 }
@@ -421,11 +423,11 @@ label[for] {
 .btn_main {
 	text-decoration: none;
 	font-size:2rem;
-	color: #0080ff;
+	color: white;
 	font-weight: bold;
 }
 .btn_main:hover {
-	color:#0000a0;
+	color:#0080ff;
 }
 
 .btn-danger {

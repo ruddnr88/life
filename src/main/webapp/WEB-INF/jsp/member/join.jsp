@@ -100,13 +100,11 @@
 		form.submit();
 		MemberJoinForm__submitDone = true;
 	}
-	function MemberJoinForm__checkLoginIdDup(input) {
+	
+	var MemberJoinForm__checkLoginIdDup = _.debounce(function(input) {
 		var form = input.form;
 		form.loginId.value = form.loginId.value.trim();
 		
-		if (form.loginId.value.length == 0) {
-			return;
-		}
 		$.get('getLoginIdDup', {
 			loginId : form.loginId.value
 		}, function(data) {
@@ -114,14 +112,18 @@
 			 if( data.resultCode.substr(0,2) == 'S-') {
 				 $message.empty().append('<div class="loginDup" style="color:green;">' + data.msg + '</div>');
 				 MemberJoinForm__validLoginId = data.loginId;
-			} else {
+			} else if(data.resultCode.substr(0,2) == 'F-') {
 				 $message.empty().append('<div class="loginDup" style="color:red;">' + data.msg + '</div>');
 				 MemberJoinForm__validLoginId = '';
 			}
+			if (form.loginId.value.length == 0) {
+				 $message.empty().append('<div style="display:none></div>');
+			} 
+			
 		}, 'json');
-		
-		
-	}
+	},500);
+	
+	
 	
 </script>
 <form method="POST" class="table-box con form1" action="doJoin"
@@ -137,7 +139,9 @@
 				<th>로그인 아이디</th>
 				<td>
 					<div class="form-control-box">
-						<input onkeyup="MemberJoinForm__checkLoginIdDup(this);" type="text" placeholder="로그인 아이디 입력해주세요." name="loginId" maxlength="30"/>
+						<input onkeyup="MemberJoinForm__checkLoginIdDup(this);"
+							type="text" placeholder="로그인 아이디 입력해주세요." name="loginId"
+							maxlength="30" />
 						<div class="message-msg"></div>
 					</div>
 				</td>

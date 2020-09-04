@@ -236,10 +236,10 @@
 				initialValue : initialValue,
 				hooks : {
 					'addImageBlobHook' : function(blob, callback) {
-						var maxSizeMb = 2;
+						var maxSizeMb = 5;
 						var maxSize = maxSizeMb * 1024 * 1024 //50MB
 						if (blob.size > maxSize) {
-							alert(maxSizeMb + "MB 이하의 이미지를 선택해주세요.");
+							alert(maxSizeMb + "MB 이하의 이미지를 선택해주세요. \n이 이상 크기의 이미지는 아래 첨부파일을 이용해주세요.");
 							return;
 						}
 						var fd = new FormData();

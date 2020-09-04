@@ -14,7 +14,7 @@
 		</colgroup>
 		<thead>
 			<tr>
-				<th>번호</th>
+				<th style="text-align: center;">번호</th>
 				<th>날짜</th>
 				<th>제목</th>
 			</tr>
@@ -22,7 +22,7 @@
 		<tbody>
 			<c:forEach items="${articles}" var="article">
 				<tr>
-					<td>${article.id}</td>
+					<td style="text-align: center;">${article.id}</td>
 					<td>${article.regDate}</td>
 					<td>
 						<a href="${article.getDetailLink(board.code)}">${article.forPrintTitle}</a>

@@ -32,23 +32,25 @@
 <link rel="stylesheet" href="/resource/keyframes.css" />
 <!-- 공통 JS -->
 <script src="/resource/app.js"></script>
-<script>
-	/* function getLocation() {
-	 if (navigator.geolocation) { // GPS를 지원하면
-	 navigator.geolocation.getCurrentPosition(function(position) {
-	 }, function(error) {
-	 console.error(error);
-	 }, {
-	 enableHighAccuracy: false,
-	 maximumAge: 0,
-	 timeout: Infinity
-	 });
-	 } else {
-	 alert('GPS를 지원하지 않습니다');
-	 }
-	 }
-	 getLocation(); */
-</script>
+<style>
+body {
+	margin: 0;
+	padding: 0;
+	background: url(img.jpg) center center fixed no-repeat;
+}
+
+video {
+	opacity: 80%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	min-width: 100%;
+	min-height: 100%;
+	width: auto;
+	height: auto;
+	z-index: -1;
+}
+</style>
 <%="<script>"%>
 var activeProfile = '${activeProfile}';
 <%="</script>"%>
@@ -57,6 +59,11 @@ var param = ${paramJson};
 <%="</script>"%>
 </head>
 <body>
+	<video muted autoplay loop>
+		<source src="/resource/videos/strom.mp4" type="video/mp4">
+		<strong>Your browser does not support the video tag.</strong>
+	</video>
+
 	<div class="loading-box flex-ai-c flex-jc-c">
 		<div class="lds-roller">
 			<div></div>
@@ -117,7 +124,7 @@ var param = ${paramJson};
 
 			<nav class="menu-box-1">
 				<div class="loginmember">
-				<c:if test="${isLogined}">
+					<c:if test="${isLogined}">
 				${loginedMember.nickname}님 환영합니다.
 				</c:if>
 				</div>
