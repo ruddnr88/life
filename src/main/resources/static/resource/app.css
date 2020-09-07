@@ -23,6 +23,7 @@ h1,
 h2,
 h3 {
     letter-spacing: -1px;
+    color:white;
 }
 
 /* 커스텀 */
@@ -72,7 +73,7 @@ h3 {
     }
 
     .page-title-box {
-        margin-top: 20px;
+        margin-top: 80px;
         margin-bottom: 20px;
     }
 }
@@ -87,6 +88,7 @@ h3 {
     left: 0;
     right: 0;
     background-color: white;
+    background-color: rgba( 255, 255, 255, 0.5);
     box-shadow: 0 0 10px black;
     padding: 0 10px;
     height: 55px;
@@ -115,7 +117,6 @@ h3 {
 
 .mobile-top-bar .btn-toggle-mobile-side-bar>:first-child {
     position: absolute;
-    background-color: white;
     top: 0;
     left: 0;
     width: 100%;
@@ -135,6 +136,7 @@ h3 {
 
 .mobile-side-bar {
     background-color: white;
+    background-color: rgba( 255, 255, 255, 0.9);
     position: fixed;
     width: 100%;
     left: 100%;
@@ -151,6 +153,12 @@ h3 {
 .mobile-side-bar .menu-box-1>ul>li>a {
     padding: 20px 0;
     font-weight: bold;
+    text-decoration: none;
+    font-size:2rem;
+}
+
+.mobile-side-bar .menu-box-1>ul>li>a:hover {
+	color:gray;
 }
 
 @media (max-width :800px) {

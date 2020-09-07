@@ -211,6 +211,10 @@ label[for] {
 }
 
 /* 테이블 관련 */
+table {
+	background-color:white;
+	background-color: rgba( 255, 255, 255, 0.3 );
+}
 .table-box {
     border-top: 3px solid black;
     box-sizing: border-box;
@@ -228,7 +232,6 @@ label[for] {
 
 .table-box>table th, .table-box>table td {
     padding: 10px;
-    text-align: left;
 }
 
 .table-box>table th:first-child, .table-box>table td:first-child {
@@ -389,7 +392,7 @@ label[for] {
 	text-align: right;
 	font-weight: bold;
 	font-size: 20px;
-	color:red;
+	color:white;
 }
 
 /* 버튼관련 */
@@ -508,3 +511,5 @@ label[for] {
     padding-left: 0 !important;
     padding-right: 0 !important;
 }
+
+

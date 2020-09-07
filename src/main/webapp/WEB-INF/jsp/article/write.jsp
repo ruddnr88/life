@@ -1,15 +1,22 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <c:set var="pageTitle" value="${board.name} 게시물 작성" />
 <%@ include file="../part/head.jspf"%>
 <%@ include file="../part/toastuiEditor.jspf"%>
+<script type="text/javascript"
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a498e4602c5507aff78f05a92830f45f&libraries=services"></script>
+
+<style>
+
+</style>
 <script>
 	function ArticleWriteForm__submit(form) {
 		if (isNowLoading()) {
 			alert('처리중입니다.');
 			return;
-		}		
+		}
 		form.title.value = form.title.value.trim();
 
 		if (form.title.value.length == 0) {
@@ -19,7 +26,8 @@
 			return;
 		}
 
-		var bodyEditor = $(form).find('.toast-editor.input-body').data('data-toast-editor');
+		var bodyEditor = $(form).find('.toast-editor.input-body').data(
+				'data-toast-editor');
 
 		var body = bodyEditor.getMarkdown().trim();
 
@@ -101,16 +109,18 @@
 			if (bodyEditor.inBodyFileIdsStr) {
 				form.fileIdsStr.value += bodyEditor.inBodyFileIdsStr;
 			}
-	
 
 			form.submit();
 		});
 	}
 </script>
-<form method="POST" class="table-box table-box-vertical con form1" action="${board.code}-doWrite" onsubmit="ArticleWriteForm__submit(this); return false;">
-	<input type="hidden" name="fileIdsStr" />
-	<input type="hidden" name="body" />
-	<input type="hidden" name="redirectUri" value="/usr/article/${board.code}-detail?id=#id">
+
+<form method="POST" class="table-box table-box-vertical con form1"
+	action="${board.code}-doWrite"
+	onsubmit="ArticleWriteForm__submit(this); return false;">
+	<input type="hidden" name="fileIdsStr" /> <input type="hidden"
+		name="body" /> <input type="hidden" name="redirectUri"
+		value="/usr/article/${board.code}-detail?id=#id">
 
 	<table>
 		<colgroup>
@@ -122,7 +132,16 @@
 				<th>제목</th>
 				<td>
 					<div class="form-control-box">
-						<input type="text" placeholder="제목을 입력해주세요." name="title" maxlength="100" />
+						<input type="text" placeholder="제목을 입력해주세요." name="title"
+							maxlength="100" />
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<th>현재위치</th>
+				<td>
+					<div class="form-control-box">
+						
 					</div>
 				</td>
 			</tr>
@@ -143,18 +162,23 @@
 https://www.youtube.com/watch?v=LmgWxezH7cc
 ```
                         </script>
-						<div data-relTypeCode="article" data-relId="0" class="toast-editor input-body"></div>
+						<div data-relTypeCode="article" data-relId="0"
+							class="toast-editor input-body"></div>
 					</div>
 				</td>
 			</tr>
 			<c:forEach var="i" begin="1" end="3" step="1">
 				<c:set var="fileNo" value="${String.valueOf(i)}" />
-				<c:set var="fileExtTypeCode" value="${appConfig.getAttachmentFileExtTypeCode('article', i)}" />
+				<c:set var="fileExtTypeCode"
+					value="${appConfig.getAttachmentFileExtTypeCode('article', i)}" />
 				<tr>
-					<th>첨부${fileNo} ${appConfig.getAttachmentFileExtTypeDisplayName('article', i)}</th>
+					<th>첨부${fileNo}
+						${appConfig.getAttachmentFileExtTypeDisplayName('article', i)}</th>
 					<td>
 						<div class="form-control-box">
-							<input type="file" accept="${appConfig.getAttachemntFileInputAccept('article', i)}" name="file__article__0__common__attachment__${fileNo}">
+							<input type="file"
+								accept="${appConfig.getAttachemntFileInputAccept('article', i)}"
+								name="file__article__0__common__attachment__${fileNo}">
 						</div>
 					</td>
 				</tr>
@@ -162,8 +186,8 @@ https://www.youtube.com/watch?v=LmgWxezH7cc
 			<tr class="tr-do">
 				<th>작성</th>
 				<td>
-					<button class="btn btn-primary" type="submit">작성</button>
-					<a class="btn btn-info" href="${listUrl}">리스트</a>
+					<button class="btn btn-primary" type="submit">작성</button> <a
+					class="btn btn-info" href="${listUrl}">리스트</a>
 				</td>
 			</tr>
 		</tbody>

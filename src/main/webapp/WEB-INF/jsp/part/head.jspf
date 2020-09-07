@@ -59,6 +59,9 @@ var param = ${paramJson};
 <%="</script>"%>
 </head>
 <body>
+<script>
+
+</script>
 	<video muted autoplay loop>
 		<source src="/resource/videos/strom.mp4" type="video/mp4">
 		<strong>Your browser does not support the video tag.</strong>
@@ -91,7 +94,7 @@ var param = ${paramJson};
 			<nav class="menu-box-1 flex-1-0-0">
 				<div class="m_loginmember">
 					<c:if test="${isLogined}">
-					${loginedMember.nickname}님 환영합니다.
+					${loginedMember.nickname}님 환영합니다.◟( ˘ ³˘)◞ ♡
 					<c:if test="${loginedMember.extra.isNeedToChangePasswordForTemp}">
 							<div class="con">
 								현재 임시 비밀번호를 사용하고 있습니다. 비밀번호를 <a style="color: red"
@@ -125,7 +128,7 @@ var param = ${paramJson};
 			<nav class="menu-box-1">
 				<div class="loginmember">
 					<c:if test="${isLogined}">
-				${loginedMember.nickname}님 환영합니다.
+				${loginedMember.nickname}님 환영합니다.◟( ˘ ³˘)◞ ♡
 				</c:if>
 				</div>
 				<ul class="flex">

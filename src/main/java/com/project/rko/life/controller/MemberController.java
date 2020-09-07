@@ -155,7 +155,7 @@ public class MemberController {
 		return "common/redirect";
 	}
 
-	// 비밀번호찾기(임시비밀번호메일)
+	// 비밀번호찾기(임시패스워드 비밀번호메일)
 	@RequestMapping("/usr/member/doFindLoginPw")
 	public String doFindLoginPw(String loginId, String name, String email, HttpSession session, Model model,
 			String redirectUri) {
