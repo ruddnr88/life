@@ -39,7 +39,7 @@ body {
 	background: url(img.jpg) center center fixed no-repeat;
 }
 
-video {
+.main_video {
 	opacity: 80%;
 	position: fixed;
 	top: 0;
@@ -62,8 +62,8 @@ var param = ${paramJson};
 <script>
 
 </script>
-	<video muted autoplay loop>
-		<source src="/resource/videos/strom.mp4" type="video/mp4">
+	<video class="main_video" muted autoplay loop>
+		<source src="/resource/videos/strom.mp4"   type="video/mp4">
 		<strong>Your browser does not support the video tag.</strong>
 	</video>
 
@@ -85,8 +85,10 @@ var param = ${paramJson};
 				src="/resource/img/logo_1@3x.png" alt="" />
 			</a>
 			<div class="flex-1-0-0"></div>
-			<a> <i class="fas fa-sign-out-alt"></i>
-			</a> <a class="btn-toggle-mobile-side-bar"> <i class="fas fa-times"></i>
+			<c:if test="${isLogined}">
+			<a href="/usr/member/doLogout"> <i class="fas fa-sign-out-alt"></i></a>
+			</c:if>
+			<a class="btn-toggle-mobile-side-bar"> <i class="fas fa-times"></i>
 				<i class="fas fa-bars"></i>
 			</a>
 		</div>
@@ -108,7 +110,7 @@ var param = ${paramJson};
 					<li><a href="/usr/article/free-list" class="flex flex-jc-c">자유게시판</a></li>
 					<li><a href="/usr/article/notice-list" class="flex flex-jc-c">공지사항</a></li>
 					<c:if test="${isLogined}">
-						<li><a class="flex flex-jc-c" href="/usr/member/doLogout">로그아웃</a></li>
+						
 						<li><a class="flex flex-jc-c"
 							href="/usr/member/checkPassword?redirectUri=${Util.getUriEncoded('/usr/member/modify')}">정보수정</a></li>
 					</c:if>
