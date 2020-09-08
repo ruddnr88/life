@@ -42,6 +42,17 @@
 		WHERE A.displayStatus = 1
 		AND A.id = #{id}
 	</select>
+	<!-- 게시물 다음글/이전글 쿼리 -->
+	<select id="next" resultMap="article">
+		SELECT * FROM article WHERE seq = #{seq}
+		UNION ALL (
+		SELECT * FROM articleWHERE <![CDATA[seq < #{seq}]]>
+		ORDER BY seq DESC LIMIT 2)
+		UNION ALL (
+		SELECT * FROM article WHERE <![CDATA[seq > #{seq}]]>
+		ORDER BY seq ASC LIMIT 2)
+		ORDER BY seq DESC;
+	</select>
 	<!-- 글쓰기 -->
 	<insert id="write" useGeneratedKeys="true" keyProperty="id">
 		INSERT

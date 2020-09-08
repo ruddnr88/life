@@ -66,8 +66,10 @@
 			href="${board.code}-doDelete?id=${article.id}"
 			onclick="if ( confirm('삭제하시겠습니까?') == false ) return false;">삭제</a>
 	</c:if>
-
 	<a href="${listUrl}" class="btn btn-info">목록</a>
+	
+
+	
 </div>
 
 <!-- $$$$$$$$$$$$$ 댓글 작성하기 $$$$$$$$$$$$$$$  -->

@@ -324,7 +324,7 @@ table {
 }
 
 .form1 .form-control-box>textarea {
-    min-height: 300px;
+    min-height: 100px;
     resize: none;
 }
 

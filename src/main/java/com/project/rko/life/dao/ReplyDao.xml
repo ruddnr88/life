@@ -5,6 +5,7 @@
 <mapper namespace="com.project.rko.life.dao.ReplyDao">
 	<!--댓글리스트불러오기 -->
 	<select id="getForPrintReplies" resultMap="reply">
+	<!-- <!CDATA[ 는 문장을 문자열로 인식 -->
 		<![CDATA[
 		SELECT AR.*,
 		M.nickname AS extra__writer
