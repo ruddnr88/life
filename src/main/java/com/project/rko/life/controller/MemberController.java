@@ -44,6 +44,7 @@ public class MemberController {
 		}
 
 		int newMemberId = memberService.join(param);
+		
 
 		String redirectUri = (String) param.get("redirectUri");
 		model.addAttribute("redirectUri", redirectUri);

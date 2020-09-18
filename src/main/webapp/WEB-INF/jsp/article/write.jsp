@@ -159,7 +159,7 @@
 아래와 같이 첨부할 수 있습니다.
 
 ```youtube
-https://www.youtube.com/watch?v=LmgWxezH7cc
+https://youtu.be/pjaIu6LcdqI
 ```
                         </script>
 						<div data-relTypeCode="article" data-relId="0"

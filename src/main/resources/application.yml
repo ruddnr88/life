@@ -46,10 +46,11 @@ server:
     include-binding-errors: always
 custom:
   siteName: 오늘날씨
-  siteMainUri: https://todayWeather.com/
+  siteMainUri: https://life.rud.kr/
   logoText: 오늘날씨
-  emailFrom: no-reply@todayWeather.com
-  emailFromName: 오늘날씨
+  emailFrom: no-reply@life.rud.kr
+  emailFromName: 오늘날씨관리자
+
 
 ---
 
@@ -65,6 +66,7 @@ spring:
     multipart:
       location: /tmp
   datasource:
-    username: life
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/life?useUnicode=true&characterEncoding=utf8&autoReconnect=true&serverTimezone=Asia/Seoul&useOldAliasMetadataBehavior=true&zeroDateTimeNehavior=convertToNull
+    url: jdbc:mysql://127.0.0.1:3306/st_life?useUnicode=true&characterEncoding=utf8&autoReconnect=true&serverTimezone=Asia/Seoul&useOldAliasMetadataBehavior=true&zeroDateTimeNehavior=convertToNull
+    username: planLocal
+    password: planLocal
