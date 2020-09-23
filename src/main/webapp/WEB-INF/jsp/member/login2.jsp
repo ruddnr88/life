@@ -5,8 +5,7 @@
 <c:set var="pageTitle" value="로그인" />
 <%@ include file="../part/head.jspf"%>
 
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js"></script>
 
 <script>
 	var MemberLoginForm__submitDone = false;
@@ -57,25 +56,12 @@
 		MemberLoginForm__submitDone = true;
 	}
 </script>
-<form method="POST" class="login-form con form1" action="doLogin"
+<form method="POST" class="table-box con form1" action="doLogin"
 	onsubmit="MemberLoginForm__submit(this); return false;">
 	<input type="hidden" name="redirectUri" value="${param.redirectUri}">
 	<input type="hidden" name="loginPwReal">
 
-	<div class="login-page">
-
-		<div class="login-page">
-			<div class="form">
-					<input type="text" placeholder="your ID" name="loginId"/> 
-					<input type="password" placeholder="your password" name="loginPw"/>
-					<button>login</button>
-					<p class="message">
-						아이디 비번 잊으셨습니까? <a href="/usr/member/findAccount">ID/PW찾기</a>
-					</p>
-			</div>
-		</div>
-	</div>
-		<%-- <table>
+	<table>
 		<colgroup>
 			<col width="100">
 		</colgroup>
@@ -106,7 +92,7 @@
 				</td>
 			</tr>
 		</tbody>
-	</table> --%>
+	</table>
 </form>
 
 <%@ include file="../part/foot.jspf"%>

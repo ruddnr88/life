@@ -12,9 +12,9 @@ public class HomeController {
 	return "/home/main";
 	}
 	
-	@RequestMapping("/usr/home/main2")
-	public String showMain3() {
-	return "/home/main2";
+	@RequestMapping("/usr/home/intro")
+	public String showIntro() {
+	return "/home/intro";
 	}
 	@RequestMapping("/")
 	public String showMain2() {
