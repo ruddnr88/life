@@ -107,6 +107,7 @@ var param = ${paramJson};
 				</div>
 				<ul>
 					<li><a href="/usr/home/main" class="flex flex-jc-c">홈</a></li>
+					<li><a href="/usr/home/main2" class="flex flex-jc-c">소개</a></li>
 					<li><a href="/usr/article/free-list" class="flex flex-jc-c">자유게시판</a></li>
 					<li><a href="/usr/article/notice-list" class="flex flex-jc-c">공지사항</a></li>
 					<c:if test="${isLogined}">
@@ -136,6 +137,8 @@ var param = ${paramJson};
 				<ul class="flex">
 					<li class="padding-0-10"><a href="/usr/home/main"
 						class="btn_main">홈</a></li>
+						<li class="padding-0-10"><a href="/usr/home/main2"
+						class="btn_main">소개</a></li>
 					<li class="padding-0-10"><a href="/usr/article/free-list"
 						class="btn_main">자유게시판</a></li>
 					<li class="padding-0-10"><a href="/usr/article/notice-list"

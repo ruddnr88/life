@@ -329,5 +329,15 @@ h3 {
     top: 56px;
     left: 12px;
 }
-
+/* 서치바 */
+@media (max-width :800px) {
+	.sch {
+	width:80px !important;
+	}
+	.search {
+	width: 150px;
+	}
+	.search-btn {
+	color:white;}
+}
 

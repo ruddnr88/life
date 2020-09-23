@@ -15,7 +15,10 @@ public interface ArticleDao {
 	Board getBoardByCode(String boardCode);
 	
 	//게시판 보드 아이디 받아온거임
-	List<Article> getForPrintArticles(@Param("id") int id);
+	List<Article> getForPrintArticles(Map<String, Object> param);
+	
+//	List<Article> getForPrintArticles(@Param("id") int id);
+
 
 	Article getForPrintArticleById(int id);
 
@@ -24,5 +27,9 @@ public interface ArticleDao {
 	Article getArticleById(int id);
 
 	void modify(Map<String, Object> param);
+
+	void delete(int id);
+
+	int getTotalCount(Map<String, Object> param);
 
 }

@@ -13,8 +13,24 @@
 		A.memberId = M.id
 		WHERE A.displayStatus = 1
 		AND A.boardId= #{id}
+		<choose>
+			<when test="searchType == 'title'">
+				AND A.title LIKE CONCAT('%',#{searchKeyword},'%')
+			</when>
+			<when test="searchType == 'body'">
+				AND A.body LIKE CONCAT('%',#{searchKeyword},'%')
+			</when>
+			<when test="searchType == 'titleAndBody'">
+				AND (title LIKE CONCAT('%',#{searchKeyword},'%') OR
+				A.body LIKE CONCAT('%',#{searchKeyword},'%'))
+			</when>
+		</choose>
 		ORDER BY
 		A.id DESC
+		<if test="limitCount != null">
+			LIMIT #{limitFrom}, #{limitCount}
+		</if>
+		
 	</select>
 	<!-- 게시물 번호 불러오기 -->
 	<select id="getArticleById" resultType="Article">
@@ -42,11 +58,31 @@
 		WHERE A.displayStatus = 1
 		AND A.id = #{id}
 	</select>
+	<!-- 전체게시물수 -->
+	<select id="getTotalCount" parameterType="map" resultType="int">
+		SELECT COUNT(*) 
+		FROM article
+		WHERE displayStatus = 1
+		AND boardId=#{id}
+		<choose>
+			<when test="searchType == 'title'">
+				AND title LIKE CONCAT('%',#{searchKeyword},'%')
+			</when>
+			<when test="searchType == 'body'">
+				AND body LIKE CONCAT('%',#{searchKeyword},'%')
+			</when>
+			<when test="searchType == 'titleAndBody'">
+				AND (title LIKE CONCAT('%',#{searchKeyword},'%') OR
+				body LIKE CONCAT('%',#{searchKeyword},'%'))
+			</when>
+		</choose>
+	</select>
 	<!-- 게시물 다음글/이전글 쿼리 -->
 	<select id="next" resultMap="article">
 		SELECT * FROM article WHERE seq = #{seq}
 		UNION ALL (
-		SELECT * FROM articleWHERE <![CDATA[seq < #{seq}]]>
+		SELECT * FROM
+		articleWHERE <![CDATA[seq < #{seq}]]>
 		ORDER BY seq DESC LIMIT 2)
 		UNION ALL (
 		SELECT * FROM article WHERE <![CDATA[seq > #{seq}]]>
@@ -74,6 +110,14 @@
 			<if test="body != null">body = #{body},</if>
 		</set>
 		WHERE id = #{id}
+	</update>
+	<update id="delete">
+		UPDATE article
+		SET delStatus = 1,
+		delDate = NOW(),
+		displayStatus = 0
+		WHERE id =
+		#{id}
 	</update>
 
 	<resultMap type="Article" id="article">

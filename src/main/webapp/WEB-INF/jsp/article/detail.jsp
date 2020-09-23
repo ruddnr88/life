@@ -7,6 +7,7 @@
 <%@ include file="../part/head.jspf"%>
 <%@ include file="../part/toastuiEditor.jspf"%>
 
+
 <div class="article-detail-box table-box table-box-vertical con">
 	<table>
 		<colgroup>

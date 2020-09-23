@@ -31,12 +31,19 @@ public class ArticleService {
 		return articleDao.getBoardByCode(boardCode);
 	}
 
+//	 게시물 목록 가져오기(원래 보드Id)
+//	public List<Article> getForPrintArticles(int id) {
+//		List<Article> articles = articleDao.getForPrintArticles(id);
+//
+//		return articles;
+//	}
 	// 게시물 목록 가져오기
-	public List<Article> getForPrintArticles(int id) {
-		List<Article> articles = articleDao.getForPrintArticles(id);
+	public List<Article> getForPrintArticles( Map<String, Object> param) {
+		List<Article> articles = articleDao.getForPrintArticles(param);
 
 		return articles;
 	}
+
 
 	// 게시물 아이디로 가져오기(상세보기)
 	public Article getForPrintArticleById(Member actor, int id) {
@@ -152,6 +159,17 @@ public class ArticleService {
 			}
 		}
 
+	}
+
+	public void delete(int id) {
+		
+		articleDao.delete(id);
+
+		
+	}
+
+	public int getTotalCount(Map<String, Object> param) {
+		return articleDao.getTotalCount(param);
 	}
 
 	

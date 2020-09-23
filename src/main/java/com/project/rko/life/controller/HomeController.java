@@ -11,6 +11,11 @@ public class HomeController {
 	public String showMain() {
 	return "/home/main";
 	}
+	
+	@RequestMapping("/usr/home/main2")
+	public String showMain3() {
+	return "/home/main2";
+	}
 	@RequestMapping("/")
 	public String showMain2() {
 	return "/home/main";

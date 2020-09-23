@@ -1,5 +1,6 @@
 package com.project.rko.life.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -26,13 +27,63 @@ public class ArticleController {
 	
 	//리스트보기
 	@RequestMapping("/usr/article/{boardCode}-list")
-	public String showList(Model model, @PathVariable("boardCode") String boardCode) {
+	public String showList(Model model, @PathVariable("boardCode") String boardCode, String searchKeyword, String searchType,
+			@RequestParam(value = "page", defaultValue = "1") int page, HttpServletRequest request) {
 		Board board = articleService.getBoardByCode(boardCode);
 		model.addAttribute("board", board);
 		
-		List<Article> articles = articleService.getForPrintArticles(board.getId());
+		if (searchType != null) {
+			searchType = searchType.trim();
+		}
+
+		if (searchKeyword != null) {
+			searchKeyword = searchKeyword.trim();
+		}
+		
+		Map<String, Object> getForPrintArticlesByParam = new HashMap();
+		getForPrintArticlesByParam.put("searchKeyword", searchKeyword);
+		getForPrintArticlesByParam.put("searchType", searchType);
+		getForPrintArticlesByParam.put("boardCode", boardCode);
+		getForPrintArticlesByParam.put("id", board.getId());
+		
+		int itemsInAPage = 10;
+		int limitCount = itemsInAPage;
+		int limitFrom = (page - 1) * itemsInAPage;
+		getForPrintArticlesByParam.put("limitCount", limitCount);
+		getForPrintArticlesByParam.put("limitFrom", limitFrom);
+		int totalCount = articleService.getTotalCount(getForPrintArticlesByParam);
+		int totalPage = (int) Math.ceil(totalCount / (double) itemsInAPage);
+		
+		List<Article> articles = articleService.getForPrintArticles(getForPrintArticlesByParam);
+		//List<Article> articles = articleService.getForPrintArticles(board.getId());
+		//원래는 보드Id만 가져왔었음.
 
 		model.addAttribute("articles", articles);
+		model.addAttribute("totalPage", totalPage);
+		model.addAttribute("totalCount", totalCount);
+		
+		int pageBoundSize = 5;
+		int pageStartsWith = page - pageBoundSize;
+		if (pageStartsWith < 1) {
+			pageStartsWith = 1;
+		}
+		int pageEndsWith = page + pageBoundSize;
+		if (pageEndsWith > totalPage) {
+			pageEndsWith = totalPage;
+		}
+
+		model.addAttribute("pageStartsWith", pageStartsWith);
+		model.addAttribute("pageEndsWith", pageEndsWith);
+
+		boolean beforeMorePages = pageStartsWith > 1;
+		boolean afterMorePages = pageEndsWith < totalPage;
+
+		model.addAttribute("beforeMorePages", beforeMorePages);
+		model.addAttribute("afterMorePages", afterMorePages);
+		model.addAttribute("pageBoundSize", pageBoundSize);
+
+		model.addAttribute("needToShowPageBtnToFirst", page != 1);
+		model.addAttribute("needToShowPageBtnToLast", page != totalPage);
 
 		return "article/list";
 	}
@@ -104,6 +155,8 @@ public class ArticleController {
 
 		return "article/modify";
 	}
+	
+	
 	@RequestMapping("/usr/article/{boardCode}-doModify")
 	public String doModify(@RequestParam Map<String, Object> param, HttpServletRequest req, int id, @PathVariable("boardCode") String boardCode, Model model) {
 		Board board = articleService.getBoardByCode(boardCode);
@@ -126,7 +179,28 @@ public class ArticleController {
 
 		return "redirect:" + redirectUri;
 	}
+	
+	//게시물 삭제
+	@RequestMapping("/usr/article/{boardCode}-doDelete")
+	public String doDelete(HttpServletRequest req, int id, @PathVariable("boardCode") String boardCode, Model model) {
+		Board board = articleService.getBoardByCode(boardCode);
+		model.addAttribute("board", board);
+		Member loginedMember = (Member)req.getAttribute("loginedMember");
+		
+		ResultData checkActorCanDeleteResultData = articleService.checkActorCanModify(loginedMember, id);
+		
+		if (checkActorCanDeleteResultData.isFail() ) {
+			model.addAttribute("alertMsg", checkActorCanDeleteResultData.getMsg());
+			
+			return "common/redirect";
+		}
+		
+		articleService.delete(id);
+		
+		return "redirect:{boardCode}-list";
+	}
 
 
 	
 }
+

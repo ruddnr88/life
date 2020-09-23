@@ -9,6 +9,11 @@
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a498e4602c5507aff78f05a92830f45f&libraries=services"></script>
 
 <style>
+#centerAddr {
+	display: block;
+	margin-top: 2px;
+	font-weight: normal;
+}
 
 </style>
 <script>
@@ -140,9 +145,7 @@
 			<tr>
 				<th>현재위치</th>
 				<td>
-					<div class="form-control-box">
-						
-					</div>
+					<div class="form-control-box"><span id="centerAddr"></span></div>
 				</td>
 			</tr>
 			<tr>
