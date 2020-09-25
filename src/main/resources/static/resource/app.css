@@ -48,6 +48,9 @@ h3 {
     .visible-on-md-up {
         display: none;
     }
+    #back-to-top {
+    	display:none !important;
+    }
 }
 
 .outer-box {
@@ -339,6 +342,7 @@ h3 {
 	}
 	.search-btn {
 	color:white;}
+	
 	
 }
 /* 아이디,비번찾기 폼 */

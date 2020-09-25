@@ -200,6 +200,7 @@ var param = ${paramJson};
 			</nav>
 		</div>
 		<h1 class="page-title-box con">${pageTitle}</h1>
+		<!-- 탑으로 가는 아이콘 -->
 		<a id="back-to-top" href="#" class="back-to-top-css" role="button"
 			title="Move Top" data-toggle="tooltip" data-placement="left"><span
 			class="glyphicon glyphicon-chevron-up"><i
