@@ -62,19 +62,17 @@
 	<input type="hidden" name="redirectUri" value="${param.redirectUri}">
 	<input type="hidden" name="loginPwReal">
 
-	<div class="login-page">
 
 		<div class="login-page">
 			<div class="form">
-					<input type="text" placeholder="your ID" name="loginId"/> 
-					<input type="password" placeholder="your password" name="loginPw"/>
+					<input type="text" placeholder="아이디를 입력하세요." name="loginId"/> 
+					<input type="password" placeholder="비밀번호를 입력하세요." name="loginPw"/>
 					<button>login</button>
 					<p class="message">
 						아이디 비번 잊으셨습니까? <a href="/usr/member/findAccount">ID/PW찾기</a>
 					</p>
 			</div>
 		</div>
-	</div>
 		<%-- <table>
 		<colgroup>
 			<col width="100">

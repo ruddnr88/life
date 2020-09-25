@@ -67,40 +67,78 @@
 	<div class="tab_box_con">
 		<div class="tab_box on">
 			<form action="doFindLoginId" method="POST"
+				class="table-box con form1"
 				onsubmit="FindLoginIdForm__submit(this); return false;">
-				<div class="login-page">
-					<div class="form">
-						<div class="form-control-box">
-							<input name="name" autofocus type="text"
-								placeholder="이름을 입력해주세요." maxlength="30" autofocus="autofocus" />
-						</div>
-						<div class="form-control-box">
-							<input name="email" type="email" placeholder="이메일을 입력해주세요."
-								maxlength="30" />
-						</div>
-						<button type="submit">아이디찾기</button>
-						<p class="message">팝업으로 아이디를 알려드리오니 개인정보유출에 주의하십시오.</p>
-					</div>
-				</div>
+				<table>
+					<colgroup>
+						<col width="100">
+					</colgroup>
+					<tbody>
+						<tr>
+							<th>이름</th>
+							<td>
+								<div class="form-control-box">
+									<input name="name" autofocus type="text"
+										placeholder="이름을 입력해주세요." maxlength="30" autofocus="autofocus" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<th>이메일</th>
+							<td>
+								<div class="form-control-box">
+									<input name="email" type="email" placeholder="이메일을 입력해주세요."
+										maxlength="30" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<th>찾기</th>
+							<td>
+								<button class="btn btn-primary" type="submit">아이디찾기</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
 			</form>
 		</div>
 		<div class="tab_box">
 			<form action="doFindLoginPw" method="POST"
+				class="table-box con form1"
 				onsubmit="FindLoginPwForm__submit(this); return false;">
-				<div class="login-page">
-					<div class="form">
-						<div class="form-control-box">
-							<input name="loginId" autofocus type="text"
-								placeholder="아이디를 입력해주세요." maxlength="30" autofocus="autofocus" />
-						</div>
-						<div class="form-control-box">
-							<input name="email" type="email" placeholder="이메일을 입력해주세요."
-								maxlength="30" />
-						</div>
-						<button type="submit">임시 비밀번호 찾기</button>
-						<p class="message">가입하신 메일로 임시비밀번호가 발송됩니다.</p>
-					</div>
-				</div>
+				<table>
+					<colgroup>
+						<col width="100">
+					</colgroup>
+					<tbody>
+						<tr>
+							<th>아이디</th>
+							<td>
+								<div class="form-control-box">
+									<input name="loginId" autofocus type="text"
+										placeholder="아이디를 입력해주세요." maxlength="30"
+										autofocus="autofocus" />
+								</div>
+							</td>
+						</tr>
+		
+						<tr>
+							<th>이메일</th>
+							<td>
+								<div class="form-control-box">
+									<input name="email" type="email" placeholder="이메일을 입력해주세요."
+										maxlength="30" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<th>찾기</th>
+							<td>
+								<button class="btn btn-primary" type="submit">임시비번메일발송</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
 			</form>
 		</div>
 	</div>

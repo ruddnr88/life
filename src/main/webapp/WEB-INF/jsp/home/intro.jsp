@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<c:set var="pageTitle" value="메인" />
+<c:set var="pageTitle" value="소개" />
 <%@ include file="../part/head.jspf"%>
 
 <!DOCTYPE html>
@@ -11,73 +11,9 @@
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a498e4602c5507aff78f05a92830f45f&libraries=services"></script>
 <meta charset="UTF-8">
-<style>
-.map_wrap {
-	position: relative;
-	width: 100%;
-	height: 350px;
-}
-
-.title {
-	font-weight: bold;
-	display: block;
-}
-
-.hAddr {
-	position: absolute;
-	left: 10px;
-	top: 10px;
-	border-radius: 2px;
-	background: #fff;
-	background: rgba(255, 255, 255, 0.8);
-	z-index: 1;
-	padding: 5px;
-}
-
-#centerAddr {
-	display: block;
-	margin-top: 2px;
-	font-weight: normal;
-}
-
-.bAddr {
-	padding: 5px;
-	text-overflow: ellipsis;
-	overflow: hidden;
-	white-space: nowrap;
-}
-</style>
-<script>
-	$(function() {
-		// Geolocation API에 액세스할 수 있는지를 확인
-		if (navigator.geolocation) {
-			//위치 정보를 얻기
-			navigator.geolocation.getCurrentPosition(function(pos) {
-				var lat = pos.coords.latitude, // 위도
-				lon = pos.coords.longitude; // 경도
-			});
-		} else {
-			alert("이 브라우저에서는 Geolocation이 지원되지 않습니다.")
-		}
-
-		var geocoder = new kakao.maps.services.Geocoder();
-
-		var callback = function(result, status) {
-			if (status === kakao.maps.services.Status.OK) {
-
-				console.log('지역 명칭 : ' + result[0].address_name);
-				console.log('행정구역 코드 : ' + result[0].code);
-			}
-		};
-
-		geocoder.coord2RegionCode(lat, lon, callback);
-	});
-</script>
 </head>
 <body>
 	<div class="con">
-		<ul>
-			<li>위도: <span id="lat"></span></li>
-			<li>경도: <span id="lon"></span></li>
-			<span id="centerAddr"></span>
-		</ul>
+	<h1>우리는 실시간 날씨가 필요합니다.</h1>
+	<p style="color:white;"> 지구온난화로 인해 지구의 기상 변화는 시시각각 변합니다. <br> 최고의 조건과 기술력이 있다고 한들,
+	한시 앞도 알아볼 수 없는 날씨의 변화, 실시간으로 현재 위치에 있는 사용자가 자신의 날씨를 공유해보세요.  </p>

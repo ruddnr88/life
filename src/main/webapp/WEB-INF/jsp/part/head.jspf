@@ -50,6 +50,25 @@ body {
 	height: auto;
 	z-index: -1;
 }
+
+.back-to-top-css {
+	cursor: pointer;
+	position: fixed;
+	bottom: 10px;
+	right: 20px;
+	display: none;
+	width: 50px;
+	height: 50px;
+	border-radius: 50px;
+	background: rgba(255, 255, 255, 0.8);
+	text-align: center;
+}
+
+.back-to-top-css i {
+	margin-top: 10px;
+	font-size:2rem;
+	color:#3D94F6;
+}
 </style>
 <%="<script>"%>
 var activeProfile = '${activeProfile}';
@@ -59,11 +78,31 @@ var param = ${paramJson};
 <%="</script>"%>
 </head>
 <body>
-<script>
+	<script>
+		$(document).ready(function() {
+			$(window).scroll(function() {
+				if ($(this).scrollTop() > 50) {
+					$('#back-to-top').fadeIn();
+				} else {
+					$('#back-to-top').fadeOut();
+				}
+			});
+			// scroll body to 0px on click
+			$('#back-to-top').click(function() {
+				$('#back-to-top').tooltip('hide');
+				$('body,html').animate({
+					scrollTop : 0
+				}, 800);
+				return false;
+			});
 
-</script>
+			$('#back-to-top').tooltip('show');
+
+		});
+	</script>
+
 	<video class="main_video" muted autoplay loop>
-		<source src="/resource/videos/strom.mp4"   type="video/mp4">
+		<source src="/resource/videos/strom.mp4" type="video/mp4">
 		<strong>Your browser does not support the video tag.</strong>
 	</video>
 
@@ -79,14 +118,16 @@ var param = ${paramJson};
 			<div></div>
 		</div>
 	</div>
+
 	<div class="outer-box">
+
 		<div class="mobile-top-bar visible-on-sm-down flex flex flex-ai-c">
-			<a href="/home/main" class="logo img-box"> <img
+			<a href="/usr/home/main" class="logo img-box"> <img
 				src="/resource/img/logo_1@3x.png" alt="" />
 			</a>
 			<div class="flex-1-0-0"></div>
 			<c:if test="${isLogined}">
-			<a href="/usr/member/doLogout"> <i class="fas fa-sign-out-alt"></i></a>
+				<a href="/usr/member/doLogout"> <i class="fas fa-sign-out-alt"></i></a>
 			</c:if>
 			<a class="btn-toggle-mobile-side-bar"> <i class="fas fa-times"></i>
 				<i class="fas fa-bars"></i>
@@ -111,7 +152,7 @@ var param = ${paramJson};
 					<li><a href="/usr/article/free-list" class="flex flex-jc-c">자유게시판</a></li>
 					<li><a href="/usr/article/notice-list" class="flex flex-jc-c">공지사항</a></li>
 					<c:if test="${isLogined}">
-						
+
 						<li><a class="flex flex-jc-c"
 							href="/usr/member/checkPassword?redirectUri=${Util.getUriEncoded('/usr/member/modify')}">정보수정</a></li>
 					</c:if>
@@ -137,7 +178,7 @@ var param = ${paramJson};
 				<ul class="flex">
 					<li class="padding-0-10"><a href="/usr/home/main"
 						class="btn_main">홈</a></li>
-						<li class="padding-0-10"><a href="/usr/home/intro"
+					<li class="padding-0-10"><a href="/usr/home/intro"
 						class="btn_main">소개</a></li>
 					<li class="padding-0-10"><a href="/usr/article/free-list"
 						class="btn_main">자유게시판</a></li>
@@ -159,3 +200,7 @@ var param = ${paramJson};
 			</nav>
 		</div>
 		<h1 class="page-title-box con">${pageTitle}</h1>
+		<a id="back-to-top" href="#" class="back-to-top-css" role="button"
+			title="Move Top" data-toggle="tooltip" data-placement="left"><span
+			class="glyphicon glyphicon-chevron-up"><i
+				class="fas fa-arrow-up"></i></span></a>

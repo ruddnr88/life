@@ -208,10 +208,9 @@ label[for] {
 .flex-1-0-0 {
 	flex: 1 0 0;
 }
-/*로그인*/
+/* 로그인,아이디비번,회원가입 폼*/
 .login-page {
-	width: 360px;
-	padding: 8% 0 0;
+	
 	margin: auto;
 }
 
@@ -272,6 +271,8 @@ label[for] {
 .form .register-form {
 	display: none;
 }
+
+
 
 .container {
 	position: relative;
@@ -417,10 +418,7 @@ table {
 		margin-top: 0 !important;
 	}
 }
-/*로그인폼*/
-.login-table {
-	width: 50%;
-}
+
 
 /* 폼 관련 */
 .form1 .form-control-box>input, .form1 .form-control-box>textarea {
@@ -469,8 +467,27 @@ table {
 
 /*아이디/비번찾기*/
 .tab_menu {
-	margin-left: 30px;
+	text-align: center;
 }
+.tab_menu_btn:hover, .tab_menu_btn:active, .tab_menu_btn:focus {
+	background: #004080;
+}
+
+.tab_menu_btn {
+	font-family: "Roboto", sans-serif;
+	text-transform: uppercase;
+	outline: 0;
+	background: #0080c0;
+	width: 18.5%;
+	border: 0;
+	padding: 15px;
+	color: #FFFFFF;
+	font-size: 14px;
+	-webkit-transition: all 0.3 ease;
+	transition: all 0.3 ease;
+	cursor: pointer;
+}
+
 
 .tab_box {
 	display: none;
@@ -629,7 +646,7 @@ table {
 	padding: .8em .5em; /* 여백으로 높이 설정 */
 	font-family: inherit; /* 폰트 상속 */
 	background: no-repeat 95% 50%; /* 네이티브 화살표 대체 */
-	border: 1px solid #999;
+	border: 1px solid #ffffff;
 	border-radius: 0px; /* iOS 둥근모서리 제거 */
 	-webkit-appearance: none; /* 네이티브 외형 감추기 */
 	-moz-appearance: none;

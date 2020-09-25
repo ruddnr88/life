@@ -142,12 +142,7 @@
 					</div>
 				</td>
 			</tr>
-			<tr>
-				<th>현재위치</th>
-				<td>
-					<div class="form-control-box"><span id="centerAddr"></span></div>
-				</td>
-			</tr>
+
 			<tr>
 				<th>내용</th>
 				<td>

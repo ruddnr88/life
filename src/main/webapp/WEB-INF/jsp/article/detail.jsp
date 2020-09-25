@@ -27,6 +27,10 @@
 				<td>${article.forPrintTitle}</td>
 			</tr>
 			<tr>
+				<th>작성자</th>
+				<td>${article.extra.writer}</td>
+			</tr>
+			<tr>
 				<th>내용</th>
 				<td><script type="text/x-template">${article.body}</script>
 					<div class="toast-editor toast-editor-viewer"></div></td>
@@ -68,9 +72,34 @@
 			onclick="if ( confirm('삭제하시겠습니까?') == false ) return false;">삭제</a>
 	</c:if>
 	<a href="${listUrl}" class="btn btn-info">목록</a>
-	
 
-	
+
+
+</div>
+
+<h2 class="con">댓글 목록</h2>
+<div class="reply-list-box table-box table-box-data con">
+	<table>
+		<colgroup>
+			<col class="table-first-col">
+			<col width="100">
+			<col width="140">
+			<col>
+			<col width="180">
+		</colgroup>
+		<thead>
+			<tr>
+				<th>번호</th>
+				<th>날짜</th>
+				<th>작성자</th>
+				<th>내용</th>
+				<th>비고</th>
+			</tr>
+		</thead>
+		<tbody>
+
+		</tbody>
+	</table>
 </div>
 
 <!-- $$$$$$$$$$$$$ 댓글 작성하기 $$$$$$$$$$$$$$$  -->
@@ -179,8 +208,8 @@
 
 	<form class="table-box table-box-vertical con form1"
 		onsubmit="WriteReplyForm__submit(this); return false;">
-		<input type="hidden" name="relTypeCode" value="article" /> 
-		<input type="hidden" name="relId" value="${article.id}" />
+		<input type="hidden" name="relTypeCode" value="article" /> <input
+			type="hidden" name="relId" value="${article.id}" />
 
 		<table>
 			<colgroup>
@@ -191,7 +220,8 @@
 					<th>내용</th>
 					<td>
 						<div class="form-control-box">
-							<textarea maxlength="300" name="body" placeholder="내용을 입력해주세요." class="height-300"></textarea>
+							<textarea maxlength="300" name="body" placeholder="내용을 입력해주세요."
+								class="height-300"></textarea>
 						</div>
 					</td>
 				</tr>
@@ -221,7 +251,6 @@
 	</form>
 </c:if>
 
-<h2 class="con">댓글 목록</h2>
 
 <style>
 .reply-list-box .media-box>* {
@@ -237,29 +266,6 @@
 }
 </style>
 
-<div class="reply-list-box table-box table-box-data con">
-	<table>
-		<colgroup>
-			<col class="table-first-col">
-			<col width="100">
-			<col width="140">
-			<col>
-			<col width="180">
-		</colgroup>
-		<thead>
-			<tr>
-				<th>번호</th>
-				<th>날짜</th>
-				<th>작성자</th>
-				<th>내용</th>
-				<th>비고</th>
-			</tr>
-		</thead>
-		<tbody>
-
-		</tbody>
-	</table>
-</div>
 
 <style>
 .reply-modify-form-modal-actived, reply-modify-form-modal-actived>body {
