@@ -210,7 +210,6 @@ label[for] {
 }
 /* 로그인,아이디비번,회원가입 폼*/
 .login-page {
-	
 	margin: auto;
 }
 
@@ -272,7 +271,68 @@ label[for] {
 	display: none;
 }
 
+/*회원정보수정(비번입력)*/
+.modi-form {
+	box-sizing: border-box;
+	position: relative;
+	z-index: 1;
+	background: #FFFFFF;
+	max-width: 600px;
+	margin: 0 auto 100px;
+	padding: 30px;
+	box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0
+		rgba(0, 0, 0, 0.24);
+}
 
+.modi-form button {
+	font-family: "Roboto", sans-serif;
+	text-transform: uppercase;
+	outline: 0;
+	background: #0080c0;
+	width: 49%;
+	border: 0;
+	padding: 10px;
+	color: #FFFFFF;
+	font-size: 14px;
+	-webkit-transition: all 0.3 ease;
+	transition: all 0.3 ease;
+	cursor: pointer;
+}
+
+.modi-form input {
+	outline: 0;
+	background: #f2f2f2;
+	width: 100%;
+	border: 0;
+	margin: 10px 0 10px  0 ; 
+	box-sizing : border-box;
+	font-size: 14px;
+}
+
+.modi-form button:hover, .modi-form button:active, .modi-form button:focus
+	{
+	background: #004080;
+}
+
+.modi-form .red-btn {
+	background: #df0f1f;
+}
+
+.modi-form .red-btn:hover, .modi-form .red-btn:active, .modi-form .red-btn:focus
+	{
+	background: #890a13;
+}
+
+.modi-form .message {
+	margin: 15px 0 0;
+	color: #b3b3b3;
+	font-size: 12px;
+}
+
+.modi-form .message a {
+	color: #0080c0;
+	text-decoration: none;
+}
 
 .container {
 	position: relative;
@@ -419,7 +479,6 @@ table {
 	}
 }
 
-
 /* 폼 관련 */
 .form1 .form-control-box>input, .form1 .form-control-box>textarea {
 	width: 100%;
@@ -469,6 +528,7 @@ table {
 .tab_menu {
 	text-align: center;
 }
+
 .tab_menu_btn:hover, .tab_menu_btn:active, .tab_menu_btn:focus {
 	background: #004080;
 }
@@ -487,7 +547,6 @@ table {
 	transition: all 0.3 ease;
 	cursor: pointer;
 }
-
 
 .tab_box {
 	display: none;

@@ -76,23 +76,23 @@
 <!-- 메인컨텐츠 -->
 <div class="con info-con">
 	<form action="doModify" method="POST"
-		class="table-box table-box-vertical form1"
+		class="table-box table-box-vertical form1 modi-form"
 		onsubmit="MemberModifyForm__submit(this); return false;">
 		<input type="hidden" name="redirectUri" value="/usr/home/main">
 		<input type="hidden" name="loginPwReal">
 		<table>
 			<colgroup>
-				<col class="table-first-col">
+				<col width="120">
 			</colgroup>
 			<tbody>
 				<tr>
-					<th>로그인 아이디</th>
+					<th>아이디</th>
 					<td>
 						<div class="form-control-box">${loginedMember.loginId}</div>
 					</td>
 				</tr>
 				<tr>
-					<th>비밀번호 변경(선택)</th>
+					<th>비밀번호변경(선택)</th>
 					<td>
 						<div class="form-control-box">
 							<input type="password" placeholder="새 로그인 비밀번호를 입력해주세요."
@@ -101,7 +101,7 @@
 					</td>
 				</tr>
 				<tr>
-					<th>비밀번호 변경 확인(선택)</th>
+					<th>비밀번호 변경확인(선택)</th>
 					<td>
 						<div class="form-control-box">
 							<input type="password" placeholder="새 로그인 비밀번호 확인을 입력해주세요."
@@ -137,25 +137,19 @@
 					</td>
 				</tr>
 				<tr class="tr-do">
-					<th>수정</th>
-					<td>
-						<button class="btn btn-primary" type="submit">수정</button>
-						<button class="btn btn-info" type="button"
-							onclick="history.back();">취소</button>
+					<td colspan="2" style="text-align: center;">
+						<button type="submit">수정</button>
+						<button class="red-btn" type="button" onclick="history.back();">취소</button>
 					</td>
 				</tr>
-				<tr class="tr-do">
-					<th>회원탈퇴</th>
-					<td>
-						<div
-							onclick="if ( confirm('정말 탈퇴하시겠습니까?') == false ) return false;">
-							<a class="btn btn-primary" href="doDelete"> 회원탈퇴</a>
-						</div>
-					</td>
 
-				</tr>
 			</tbody>
 		</table>
+		<div style="text-align: center;" onclick="if ( confirm('정말 탈퇴하시겠습니까?') == false ) return false;">
+			<p class="message">
+				회원탈퇴 하시겠습니까? <a href="doDelete"> 회원탈퇴</a>
+			</p>
+		</div>
 	</form>
 </div>
 

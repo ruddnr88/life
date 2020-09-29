@@ -24,6 +24,9 @@ public class Article {
 	private String body;
 	private int memberId;
 	private int boardId;
+	private float latitude ;
+	private float longitude;
+	private String addr;
 	private Map<String, Object> extra;
 	private int nextNum;
 	private int prevNum;

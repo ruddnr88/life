@@ -45,9 +45,11 @@
 	white-space: nowrap;
 }
 </style>
+
 </head>
 <body>
 	<div class="con">
+		
 		<p style="color: white; text-align: center">지도에 표시된 범위에서 1~2km
 			오차범위가 생길수있습니다.</p>
 		<div class="map_wrap">

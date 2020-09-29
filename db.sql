@@ -121,7 +121,10 @@ ALTER TABLE `file` ADD UNIQUE INDEX (`relId`, `relTypeCode`, `typeCode`, `type2C
 # 파일 테이블의 기존 인덱스에 유니크가 걸려 있어서 relId가 0 인 동안 충돌이 발생할 수 있다. 그래서 일반 인덱스로 바꾼다.
 ALTER TABLE `life`.`file` DROP INDEX `relId`, ADD INDEX (`relId` , `relTypeCode` , `typeCode` , `type2Code` , `fileNo`); 
 
-
+#아티클 테이블 경도,위도,주소 추가
+ALTER TABLE `article` ADD (`longitude` FLOAT(24) UNSIGNED NOT NULL);
+ALTER TABLE `article` ADD (`latitude` FLOAT(24) UNSIGNED NOT NULL);
+ALTER TABLE `article` ADD (`addr` CHAR(20) NOT NULL);
 
 
 ------ 

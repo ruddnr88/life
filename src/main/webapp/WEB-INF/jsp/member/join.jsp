@@ -126,7 +126,7 @@
 	
 	
 </script>
-<form method="POST" class="table-box con form1" action="doJoin"
+<form method="POST" class="table-box form1 modi-form" action="doJoin"
 	onsubmit="MemberJoinForm__submit(this); return false;">
 	<input type="hidden" name="redirectUri" value="/member/login">
 	<input type="hidden" name="loginPwReal">
@@ -192,9 +192,8 @@
 				</td>
 			</tr>
 			<tr>
-				<th>가입</th>
-				<td>
-					<button class="btn btn-primary" type="submit">가입</button>
+				<td colspan="2">
+					<button type="submit" style="width:100%">가입</button>
 				</td>
 			</tr>
 		</tbody>

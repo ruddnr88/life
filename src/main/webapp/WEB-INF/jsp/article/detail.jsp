@@ -23,6 +23,10 @@
 				<td>${article.regDate}</td>
 			</tr>
 			<tr>
+				<th>위도/경도</th>
+				<td>${article.latitude} / ${article.longitude}</td>
+			</tr>
+			<tr>
 				<th>제목</th>
 				<td>${article.forPrintTitle}</td>
 			</tr>

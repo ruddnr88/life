@@ -14,14 +14,42 @@
 	margin-top: 2px;
 	font-weight: normal;
 }
-
 </style>
 <script>
+	var latitude = '';
+	var longitude = '';
+	function getLocation() {
+		if (navigator.geolocation) { // GPS를 지원하면
+			navigator.geolocation.getCurrentPosition(function(pos) {
+				$('#latitude').html(pos.coords.latitude); // 위도
+				$('#longitude').html(pos.coords.longitude); // 경도
+
+				latitude = pos.coords.latitude;
+				longitude = pos.coords.longitude
+
+				function searchDetailAddrFromCoords(coords, callback) {
+					// 좌표로 법정동 상세 주소 정보를 요청합니다
+					geocoder.coord2Address(latitude, longitude, callback);
+				}
+
+			});
+		} else {
+			alert('GPS를 지원하지 않습니다');
+		}
+	}
+	getLocation();
+	// 주소-좌표 변환 객체를 생성합니다
+
 	function ArticleWriteForm__submit(form) {
 		if (isNowLoading()) {
 			alert('처리중입니다.');
 			return;
 		}
+
+		longitude = form.longitude.value;
+		latitude = form.latitude.value;
+		form.addr.value = form.addr.value.trim();
+
 		form.title.value = form.title.value.trim();
 
 		if (form.title.value.length == 0) {
@@ -124,8 +152,9 @@
 	action="${board.code}-doWrite"
 	onsubmit="ArticleWriteForm__submit(this); return false;">
 	<input type="hidden" name="fileIdsStr" /> <input type="hidden"
-		name="body" /> <input type="hidden" name="redirectUri"
-		value="/usr/article/${board.code}-detail?id=#id">
+		name="body" /> <input type="hidden" name="latitude" /> <input
+		type="hidden" name="longitude" /> <input type="hidden"
+		name="redirectUri" value="/usr/article/${board.code}-detail?id=#id">
 
 	<table>
 		<colgroup>
@@ -139,6 +168,15 @@
 					<div class="form-control-box">
 						<input type="text" placeholder="제목을 입력해주세요." name="title"
 							maxlength="100" />
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<th>현재주소</th>
+				<td>
+					<div class="form-control-box">
+						<span id="latitude"></span> <span id="longitude"></span> <span
+							name="addr">1234</span>
 					</div>
 				</td>
 			</tr>

@@ -98,6 +98,9 @@
 		title = #{title},
 		body = #{body},
 		memberId = #{memberId},
+		latitude = #{latitude},
+		longitude = #{longitude},
+		addr = #{addr},
 		boardId = #{boardId},
 		displayStatus = 1
 	</insert>

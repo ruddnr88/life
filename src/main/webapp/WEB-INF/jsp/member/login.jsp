@@ -61,50 +61,17 @@
 	onsubmit="MemberLoginForm__submit(this); return false;">
 	<input type="hidden" name="redirectUri" value="${param.redirectUri}">
 	<input type="hidden" name="loginPwReal">
-
-
 		<div class="login-page">
 			<div class="form">
-					<input type="text" placeholder="아이디를 입력하세요." name="loginId"/> 
-					<input type="password" placeholder="비밀번호를 입력하세요." name="loginPw"/>
-					<button>login</button>
-					<p class="message">
-						아이디 비번 잊으셨습니까? <a href="/usr/member/findAccount">ID/PW찾기</a>
-					</p>
+				<input type="text" placeholder="아이디를 입력하세요." name="loginId"/> 
+				<input type="password" placeholder="비밀번호를 입력하세요." name="loginPw"/>
+				<button>login</button>
+				<p class="message">
+					아이디 비번 잊으셨습니까? <a href="/usr/member/findAccount">ID/PW찾기</a>
+				</p>
 			</div>
 		</div>
-		<%-- <table>
-		<colgroup>
-			<col width="100">
-		</colgroup>
-		<tbody>
-			<tr>
-				<th>로그인 아이디</th>
-				<td>
-					<div class="form-control-box">
-						<input type="text" placeholder="로그인 아이디 입력해주세요." name="loginId"
-							maxlength="30" autofocus="autofocus" />
-					</div>
-				</td>
-			</tr>
-			<tr>
-				<th>로그인 비번</th>
-				<td>
-					<div class="form-control-box">
-						<input type="password" placeholder="로그인 비밀번호를 입력해주세요."
-							name="loginPw" maxlength="30" />
-					</div>
-				</td>
-			</tr>
-			<tr>
-				<th>로그인</th>
-				<td>
-					<button class="btn btn-primary" type="submit">로그인</button>
-					<a href="/usr/member/findAccount" class ="btn btn-primary">아이디/비번찾기</a>
-				</td>
-			</tr>
-		</tbody>
-	</table> --%>
+		
 </form>
 
 <%@ include file="../part/foot.jspf"%>

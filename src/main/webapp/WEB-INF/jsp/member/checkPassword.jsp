@@ -26,7 +26,7 @@
 <!-- 비밀번호확인 메인컨텐츠 -->
 <div class="con sign-form-box">
 	<form action="doCheckPassword" method="POST"
-		class="table-box con form1" 
+		class="table-box form1 modi-form" 
 		onsubmit="submitLoginForm(this); return false;">
 		<input type="hidden" name="redirectUri" value="${param.redirectUri}">
 		<input type="hidden" name="loginPwReal" />
@@ -36,19 +36,17 @@
 			</colgroup>
 			<tbody>
 				<tr>
-					<th>비밀번호</th>
-					<td>
+					<td colspan="2">
 						<div class="form-control-box">
-							<input type="password" placeholder="로그인 비밀번호를 입력해주세요."
+							<input style="margin:0;"type="password" placeholder="로그인 비밀번호를 입력해주세요."
 								name="loginPw" maxlength="30" />
 						</div>
 					</td>
 				</tr>
 				<tr>
-					<th>확인</th>
-					<td>
-						<button class="btn btn-primary" type="submit">비밀번호확인</button>
-						<button class="btn btn-primary" onclick="cancle()">취소</button>
+					<td colspan="2" >
+						<button type="submit">비밀번호확인</button>
+						<button class="red-btn" onclick="cancle()">취소</button>
 					</td>
 				</tr>
 			</tbody>
