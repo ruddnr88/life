@@ -152,8 +152,8 @@
 	action="${board.code}-doWrite"
 	onsubmit="ArticleWriteForm__submit(this); return false;">
 	<input type="hidden" name="fileIdsStr" /> <input type="hidden"
-		name="body" /> <input type="hidden" name="latitude" /> <input
-		type="hidden" name="longitude" /> <input type="hidden"
+		name="body" /> <!-- <input type="hidden" name="latitude" /> <input
+		type="hidden" name="longitude" /> --> <input type="hidden"
 		name="redirectUri" value="/usr/article/${board.code}-detail?id=#id">
 
 	<table>
@@ -174,10 +174,9 @@
 			<tr>
 				<th>현재주소</th>
 				<td>
-					<div class="form-control-box">
-						<span id="latitude"></span> <span id="longitude"></span> <span
-							name="addr">1234</span>
-					</div>
+					<!-- <div class="form-control-box">
+						<span id="latitude"></span> <span id="longitude"></span>
+					</div> -->
 				</td>
 			</tr>
 

@@ -124,7 +124,7 @@ public class ArticleController {
 	//글작성
 	@RequestMapping("/usr/article/{boardCode}-doWrite")
 	public String doWrite(@RequestParam Map<String, Object> param, HttpServletRequest req, @PathVariable("boardCode") String boardCode, Model model) {
-		System.out.println("확인하기!!!!!!!!!:"+ param);
+		System.out.println("확인하기:"+ param);
 		Board board = articleService.getBoardByCode(boardCode);
 		model.addAttribute("board", board);
 		

@@ -23,8 +23,8 @@
 				<td>${article.regDate}</td>
 			</tr>
 			<tr>
-				<th>위도/경도</th>
-				<td>${article.latitude} / ${article.longitude}</td>
+				<th>현재위치</th>
+				<td>${article.latitude}/ ${article.longitude}</td>
 			</tr>
 			<tr>
 				<th>제목</th>
@@ -70,11 +70,13 @@
 		<a class="btn btn-info"
 			href="${board.code}-modify?id=${article.id}&listUrl=${Util.getUriEncoded(listUrl)}">수정</a>
 	</c:if>
-	<c:if test="${article.extra.actorCanDelete}">
+	<!-- 관리자도 삭제가능하게 바꿈 -->
+	<c:if test="${article.extra.actorCanDelete || loginedMemberId == 1}">
 		<a class="btn btn-danger"
 			href="${board.code}-doDelete?id=${article.id}"
 			onclick="if ( confirm('삭제하시겠습니까?') == false ) return false;">삭제</a>
 	</c:if>
+
 	<a href="${listUrl}" class="btn btn-info">목록</a>
 
 
@@ -690,8 +692,7 @@
 
 		if (reply.extra.actorCanDelete) {
 			html += '<button class="btn btn-danger" type="button" onclick="ReplyList__delete(this);">삭제</button>';
-		}
-
+		} 
 		if (reply.extra.actorCanModify) {
 			html += '<button class="btn btn-info" type="button" onclick="ReplyList__showModifyFormModal(this);">수정</button>';
 		}
@@ -716,7 +717,7 @@
 
 		if (reply.extra.actorCanDelete) {
 			html += '<button class="btn btn-danger" type="button" onclick="ReplyList__delete(this);">삭제</button>';
-		}
+		} 
 
 		if (reply.extra.actorCanModify) {
 			html += '<button class="btn btn-info" type="button" onclick="ReplyList__showModifyFormModal(this);">수정</button>';
