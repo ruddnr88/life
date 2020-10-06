@@ -128,7 +128,7 @@ public class ArticleController {
 		Board board = articleService.getBoardByCode(boardCode);
 		model.addAttribute("board", board);
 		
-		Map<String, Object> newParam = Util.getNewMapOf(param, "title", "body", "fileIdsStr");
+		Map<String, Object> newParam = Util.getNewMapOf(param, "title", "body", "fileIdsStr","address");
 		int loginedMemberId = (int)req.getAttribute("loginedMemberId");
 		newParam.put("boardId", board.getId());
 		newParam.put("memberId", loginedMemberId);

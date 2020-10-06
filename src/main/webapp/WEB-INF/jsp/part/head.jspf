@@ -32,6 +32,22 @@
 <link rel="stylesheet" href="/resource/keyframes.css" />
 <!-- 공통 JS -->
 <script src="/resource/app.js"></script>
+<!-- 구글 애드센스 -->
+<script data-ad-client="ca-pub-4361814232184220" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+<!-- 구글 소유권확인중 -->
+<meta name="google-site-verification" content="zIGSkVDynukqPQwHGDr4XjsTKw_UybDlKr98ivgITr0" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-179689868-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-179689868-2');
+</script>
+
+
 <style>
 body {
 	margin: 0;

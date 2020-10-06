@@ -62,7 +62,7 @@ public class AppConfig {
 		switch ( relTypeCode ) {
 		case "applyment":
 			if ( fileNo == 1 ) {
-				return "해당 배역 1분 연기";
+				return "참조";
 			}
 			break;
 		}

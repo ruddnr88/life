@@ -24,7 +24,7 @@
 			</tr>
 			<tr>
 				<th>현재위치</th>
-				<td>${article.latitude}/ ${article.longitude}</td>
+				<td>${article.address}</td>
 			</tr>
 			<tr>
 				<th>제목</th>
@@ -693,6 +693,7 @@
 		if (reply.extra.actorCanDelete) {
 			html += '<button class="btn btn-danger" type="button" onclick="ReplyList__delete(this);">삭제</button>';
 		} 
+	
 		if (reply.extra.actorCanModify) {
 			html += '<button class="btn btn-info" type="button" onclick="ReplyList__showModifyFormModal(this);">수정</button>';
 		}

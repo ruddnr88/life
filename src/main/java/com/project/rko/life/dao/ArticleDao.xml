@@ -100,9 +100,7 @@
 		title = #{title},
 		body = #{body},
 		memberId = #{memberId},
-		latitude = 1,
-		longitude = 1,
-		addr = 1,
+		address = #{address},
 		boardId = #{boardId},
 		displayStatus = 1
 	</insert>
@@ -135,8 +133,7 @@
 		<id property="body" column="body" />
 		<id property="memberId" column="memberId" />
 		<id property="boardId" column="boardId" />
-		<!-- <id property="latitude" column="latitude" /> <id property="longitude" 
-			column="longitude" /> <id property="addr" column="addr" /> -->
+		<id property="address" column="address" />
 		<association property="extra" javaType="map">
 			<id property="writer" column="extra__writer" />
 		</association>

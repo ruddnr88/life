@@ -61,9 +61,11 @@ public class ReplyController {
 	@ResponseBody
 	public ResultData doDeleteReplyAjax(int id, HttpServletRequest req) {
 		Member loginedMember = (Member) req.getAttribute("loginedMember");
+		Member memberId = (Member)req.getAttribute("loginedMemberId");
+		
 		Reply reply = replyService.getForPrintReplyById(id);
 
-		if (replyService.actorCanDelete(loginedMember, reply) == false) {
+		if (replyService.actorCanDelete(loginedMember, reply) == false ) {
 			return new ResultData("F-1", String.format("%d번 댓글을 삭제할 권한이 없습니다.", id));
 		}
 

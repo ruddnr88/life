@@ -174,6 +174,10 @@
 				<td>${article.regDate}</td>
 			</tr>
 			<tr>
+				<th>현재위치</th>
+				<td>${article.address}</td>
+			</tr>
+			<tr>
 				<th>제목</th>
 				<td>
 					<div class="form-control-box">

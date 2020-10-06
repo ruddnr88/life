@@ -19,7 +19,6 @@ public interface ArticleDao {
 	
 //	List<Article> getForPrintArticles(@Param("id") int id);
 
-
 	Article getForPrintArticleById(int id);
 
 	void write(Map<String, Object> param);
